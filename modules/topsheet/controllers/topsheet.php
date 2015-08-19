@@ -1965,7 +1965,7 @@ class Topsheet extends Front_Controller{
 				$cell_no++;
 			
 			//Set Column Format Accounting
-			$objPHPExcel->getActiveSheet()->getStyle("C7:J$cell_no")->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_ACCOUNTING);
+			//$objPHPExcel->getActiveSheet()->getStyle("C7:J$cell_no")->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_ACCOUNTING);
 			
 			//Set Column Auto Width
 			foreach(range('B','J') as $columnID) {
