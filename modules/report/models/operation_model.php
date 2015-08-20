@@ -231,7 +231,7 @@ class operation_model extends MY_Model {
 		if($par_at=='')
 			$wherepar = 'tbl_pembiayaan.data_par >= 1';
 		elseif ($par_at=='4')
-			$wherepar = 'tbl_pembiayaan.data_par = 4 ';
+			$wherepar = 'tbl_pembiayaan.data_par >= 4 ';
 		else
 			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
 

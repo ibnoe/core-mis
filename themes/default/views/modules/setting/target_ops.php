@@ -62,7 +62,15 @@
 						<tr>     
 							<td align="center"><?php echo $no; ?></td>
 							<td><?php echo ucfirst($t->target_category); ?></td>
-							<td><?php echo ucfirst($t->target_item); ?></td>
+							<td><?php 
+									if($t->target_item == NULL) 
+										echo 'N/A';
+									else if ($t->target_item == 'PMBYN')
+										echo 'Pembiayaan';
+									else if ($t->target_item == 'OTBJ')
+										echo 'OS Tab Berjangka';
+									else
+										echo '-'; ?></td>
 							<td>
 								<?php
 									if($t->officer_name == NULL) 

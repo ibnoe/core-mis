@@ -173,6 +173,9 @@ class Operation extends Front_Controller{
 								->set('date_awal', date("d F Y", strtotime($startdate))) 
 								->set('date_akhir', date("d F Y", strtotime($enddate)))
 								->set('buffer', $buffer)
+								->set('branch', $branch)
+								->set('startdate', $startdate)
+								->set('enddate', $enddate)
 								->build('operation/operation');
 								//->build('review/review');
 			}else{

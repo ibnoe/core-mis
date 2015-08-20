@@ -36,7 +36,25 @@
 							<div class="form-group">
 								<label for="group_name" class="col-sm-3 control-label">Item Target *</label>
 								<div class="col-sm-4">
-									<input type="text" name="target_item" class="form-control" id="group_name" placeholder="" value="<?php echo $target[0]['target_item']; ?>" />
+									<select name="target_item" data-required="true" class="form-control" >
+									<?php
+										echo '<option value="0">Pilih Jenis Target</option>'; 
+									  	if($form_type == 'edit')
+									  	{ 
+									  				if($target[0]['target_item'] == 'PMBYN')
+									  					echo '<option value="PMBYN" selected="selected">Realisasi Pembiayaan</option>';
+									  				else if($target[0]['target_item'] == 'OTBJ')
+									  					echo '<option value="OTBJ" selected="selected">Outstanding Tabungan Berjangka</option>';
+									  				else{
+												  		echo '<option value="PBYN">Realisasi Pembiayaan</option>';
+												  		echo '<option value="OTBJ">Outstanding Tabungan Berjangka</option>';
+									  				}
+									  	}else{
+									  		echo '<option value="PBYN">Realisasi Pembiayaan</option>';
+									  		echo '<option value="OTBJ">Outstanding Tabungan Berjangka</option>';
+									  	}
+									  ?>
+									</select>
 								</div>
 							</div>
 							
@@ -44,23 +62,6 @@
 								<label for="group_name" class="col-sm-3 control-label">Nilai Target</label>
 								<div class="col-sm-4">
 									<input type="text" name="target_amount" class="form-control" id="group_name" placeholder="" value="<?php echo $target[0]['target_amount']; ?>" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="group_name" class="col-sm-3 control-label">Officer</label>
-								<div class="col-sm-4">
-									<select name="target_officer" data-required="true" class="form-control" >
-									<?php
-										echo '<option value="0">Pilih FO untuk diberi target</option>'; 
-										foreach ($officer as $o) {
-									  		if($form_type == 'edit' && $target[0]['target_officer'] == $o->officer_id)
-									  			{ $selected = 'selected="selected"'; }
-									  		else { $selected = ''; }
-									  		echo '<option value="'.$o->officer_id.'" '.$selected.'>'.$o->officer_name.'</option>';
-									  	}	
-									  ?>
-									</select>
 								</div>
 							</div>
 
@@ -75,6 +76,23 @@
 									  			{ $selected = 'selected="selected"'; }
 									  		else { $selected = ''; }
 									  		echo '<option value="'.$b->branch_id.'" '.$selected.'>'.$b->branch_name.'</option>';
+									  	}	
+									  ?>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="group_name" class="col-sm-3 control-label">Officer</label>
+								<div class="col-sm-4">
+									<select name="target_officer" data-required="true" class="form-control" >
+									<?php
+										echo '<option value="0">Pilih FO untuk diberi target</option>'; 
+										foreach ($officer as $o) {
+									  		if($form_type == 'edit' && $target[0]['target_officer'] == $o->officer_id)
+									  			{ $selected = 'selected="selected"'; }
+									  		else { $selected = ''; }
+									  		echo '<option value="'.$o->officer_id.'" '.$selected.'>'.$o->officer_name.'</option>';
 									  	}	
 									  ?>
 									</select>

@@ -31,7 +31,9 @@
 							</section>
 							<div class="row">
 								<div class="cold-md-12">
-									<div class="col-sm-6 m-b-xs text-right">
+									<div class="col-sm-6 m-b-xs text-justify">
+											<a href="<?php echo base_url().'index.php/report/operation_download/index/'.$branch.'/'.$startdate.'/'.$enddate; ?>" class="btn btn-sm btn-info" target="_blank">
+											Download Operation Report</a>
 									</div>
 									<div class="col-sm-6 m-b-xs text-right">
 										<form method="post" action="">
@@ -42,6 +44,11 @@
 										<button type="submit" name="submit" class="btn btn-xs btn-info">Filter</button> 
 										</form>
 									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="cold-md-12">
+									&nbsp;
 								</div>
 							</div>
 							<div class="row">
@@ -296,25 +303,25 @@
 														<td></td>
 														<td>a. Target Pencairan</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.'-'.'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo 'N/A'; ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. Realisasi Pencairan</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.'-'.'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo 'N/A'; ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>c. Pencapaian Pencairan(%)</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.'-'.'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo 'N/A'; ?></b></td>
 													</tr>
 													<tr>
 														<td><b>9</b></td>
@@ -418,8 +425,6 @@
 											</div>
 										</div>
 									</section>
-									
-									
 								</div>
 								
 								
