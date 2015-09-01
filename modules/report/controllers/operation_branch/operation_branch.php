@@ -8,6 +8,7 @@ class Operation_branch extends Front_Controller{
 	}
 
 	public function overview($bid='1'){
+
 		if($this->session->userdata('logged_in'))
 		{
 		  //Cek User Login Branch
@@ -43,16 +44,16 @@ class Operation_branch extends Front_Controller{
 				$total_officer = $this->operation_model->count_all_officer();
 				$total_officer_cabang = $this->operation_model->count_all_officer_by_branch($branch);
 
-				$total_outstanding_pinjaman_awal = $this->operation_model->sum_all_outstanding_pinjaman_by_branch_by_date($branch, $startdate);
+				$total_outstanding_pinjaman_awal  = $this->operation_model->sum_all_outstanding_pinjaman_by_branch_by_date($branch, $startdate);	
 				$total_outstanding_pinjaman_akhir = $this->operation_model->sum_all_outstanding_pinjaman_by_branch_by_date($branch, $enddate);
 
-				$total_saldo_tabsukarela_awal = $this->operation_model->sum_tabsukarela_by_branch_by_date($branch, $startdate);
+				$total_saldo_tabsukarela_awal  = $this->operation_model->sum_tabsukarela_by_branch_by_date($branch, $startdate);
 				$total_saldo_tabsukarela_akhir = $this->operation_model->sum_tabsukarela_by_branch_by_date($branch, $enddate);
 				
-				$total_saldo_tabwajib_awal = $this->operation_model->sum_tabwajib_by_branch_by_date($branch, $startdate);
+				$total_saldo_tabwajib_awal  = $this->operation_model->sum_tabwajib_by_branch_by_date($branch, $startdate);
 				$total_saldo_tabwajib_akhir = $this->operation_model->sum_tabwajib_by_branch_by_date($branch, $enddate);
 				
-				$total_saldo_tabberjangka_awal = $this->operation_model->sum_tabberjangka_by_branch_by_date($branch, $startdate);
+				$total_saldo_tabberjangka_awal  = $this->operation_model->sum_tabberjangka_by_branch_by_date($branch, $startdate);
 				$total_saldo_tabberjangka_akhir = $this->operation_model->sum_tabberjangka_by_branch_by_date($branch, $enddate);
 
 				$branch_name   = $this->operation_model->get_cabang_name($branch);
@@ -73,14 +74,26 @@ class Operation_branch extends Front_Controller{
 				//echo $officer_list[0]['officer_name'];
 				for($n = 0; $n<count($officer_list); $n++)
 				{
-					$officer_list[$n]['no_clients_awal'] = $this->operation_model->count_clients_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $startdate);
-					$officer_list[$n]['no_majelis_awal'] = $this->operation_model->count_majelis_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $startdate);
+					$officer_list[$n]['no_clients_awal']  = $this->operation_model->count_clients_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $startdate);
+					$officer_list[$n]['no_majelis_awal']  = $this->operation_model->count_majelis_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $startdate);
 					$officer_list[$n]['no_clients_akhir'] = $this->operation_model->count_clients_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $enddate);
 					$officer_list[$n]['no_majelis_akhir'] = $this->operation_model->count_majelis_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $enddate);
 					//echo $officer_list[$n]['no_clients_awal'].'-'.$officer_list[$n]['no_majelis_awal'].'<br/>';
 					//echo $branch.'b-'.$startdate.'s-'.$enddate.'e-'.'1'.'w-'.$officer_list[$n]['officer_id'].'o';
 					//echo "<br/>";
+
+					$total_outstanding_pinjaman_awal_per_officer[$n]  = $this->operation_model->sum_all_outstanding_pinjaman_per_officer_by_branch_by_date($branch, $startdate, $officer_list[$n]['officer_id'] );
+					$total_outstanding_pinjaman_akhir_per_officer[$n] = $this->operation_model->sum_all_outstanding_pinjaman_per_officer_by_branch_by_date($branch, $enddate, $officer_list[$n]['officer_id'] );
 					
+					$total_saldo_tabsukarela_per_officer_awal[$n]  = $this->operation_model->sum_tabsukarela_per_officer_by_branch_by_date($branch, $startdate, $officer_list[$n]['officer_id'] );
+					$total_saldo_tabsukarela_per_officer_akhir[$n] = $this->operation_model->sum_tabsukarela_per_officer_by_branch_by_date($branch, $enddate, $officer_list[$n]['officer_id']);
+
+					$total_saldo_tabwajib_per_officer_awal[$n]  = $this->operation_model->sum_tabwajib_per_officer_by_branch_by_date($branch, $startdate, $officer_list[$n]['officer_id'] );
+					$total_saldo_tabwajib_per_officer_akhir[$n] = $this->operation_model->sum_tabwajib_per_officer_by_branch_by_date($branch, $enddate, $officer_list[$n]['officer_id']);
+				
+					$total_saldo_tabberjangka_per_officer_awal[$n]  = $this->operation_model->sum_tabberjangka_per_officer_by_branch_by_date($branch, $startdate, $officer_list[$n]['officer_id'] );
+					$total_saldo_tabberjangka_per_officer_akhir[$n] = $this->operation_model->sum_tabberjangka_per_officer_by_branch_by_date($branch, $enddate, $officer_list[$n]['officer_id'] );
+
 					$total_par_per_cabang_minggu1_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
 					$total_par_per_cabang_minggu2_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
 					$total_par_per_cabang_minggu3_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
@@ -115,7 +128,9 @@ class Operation_branch extends Front_Controller{
 					 ->set('total_all_majelis_akhir', $total_majelis_akhir)
 					 ->set('total_all_majelis', $total_majelis_all)
 					 ->set('total_outstanding_pinjaman_awal', $total_outstanding_pinjaman_awal)
+					 ->set('total_outstanding_pinjaman_awal_per_officer', $total_outstanding_pinjaman_awal_per_officer)
 					 ->set('total_outstanding_pinjaman_akhir', $total_outstanding_pinjaman_akhir)
+					 ->set('total_outstanding_pinjaman_akhir_per_officer', $total_outstanding_pinjaman_akhir_per_officer)
 					 ->set('total_par_per_cabang_minggu1_per_officer', $total_par_per_cabang_minggu1_per_officer)
 					 ->set('total_par_per_cabang_minggu2_per_officer', $total_par_per_cabang_minggu2_per_officer)
 					 ->set('total_par_per_cabang_minggu3_per_officer', $total_par_per_cabang_minggu3_per_officer)
@@ -132,12 +147,18 @@ class Operation_branch extends Front_Controller{
 					 //->set('sum_par_minggu2', $sum_par_minggu2)
 					 //->set('sum_par_minggu3', $sum_par_minggu3)
 					 //->set('sum_par_minggu4', $sum_par_minggu4)
-					 ->set('total_saldo_tabsukarela_awal', $total_saldo_tabsukarela_awal)		
+					 ->set('total_saldo_tabsukarela_awal', $total_saldo_tabsukarela_awal)
+					 ->set('total_saldo_tabsukarela_per_officer_awal', $total_saldo_tabsukarela_per_officer_awal)		
 					 ->set('total_saldo_tabsukarela_akhir', $total_saldo_tabsukarela_akhir)
-					 ->set('total_saldo_tabwajib_awal', $total_saldo_tabwajib_awal)		
+					 ->set('total_saldo_tabsukarela_per_officer_akhir', $total_saldo_tabsukarela_per_officer_akhir)
+					 ->set('total_saldo_tabwajib_awal', $total_saldo_tabwajib_awal)	
+					 ->set('total_saldo_tabwajib_per_officer_awal', $total_saldo_tabwajib_per_officer_awal)	
 					 ->set('total_saldo_tabwajib_akhir', $total_saldo_tabwajib_akhir)
-					 ->set('total_saldo_tabberjangka_awal', $total_saldo_tabberjangka_awal)		
-					 ->set('total_saldo_tabberjangka_akhir', $total_saldo_tabberjangka_akhir)			
+					 ->set('total_saldo_tabwajib_per_officer_akhir', $total_saldo_tabwajib_per_officer_akhir)
+					 ->set('total_saldo_tabberjangka_awal', $total_saldo_tabberjangka_awal)	
+					 ->set('total_saldo_tabberjangka_per_officer_awal', $total_saldo_tabberjangka_per_officer_awal)	
+					 ->set('total_saldo_tabberjangka_akhir', $total_saldo_tabberjangka_akhir)
+					 ->set('total_saldo_tabberjangka_per_officer_akhir', $total_saldo_tabberjangka_per_officer_akhir)			
 					 ->set('total_all_cabang',  $total_cabang)
 					 ->set('total_all_officer', $total_officer)
 					 ->set('total_all_officer_cabang', $total_officer_cabang)
