@@ -163,7 +163,10 @@ class Operation_branch extends Front_Controller{
 					 ->set('total_all_officer', $total_officer)
 					 ->set('total_all_officer_cabang', $total_officer_cabang)
 					 ->set('officer_list', $officer_list)
+					 ->set('branch', $branch)
 					 ->set('branch_name', $branch_name)
+					 ->set('startdate', $startdate)
+					 ->set('enddate', $enddate)
 					 ->set('date_awal', date("d F Y", strtotime($startdate))) 
 					 ->set('date_akhir', date("d F Y", strtotime($enddate)))
 					 ->build('operation/operation_branch');

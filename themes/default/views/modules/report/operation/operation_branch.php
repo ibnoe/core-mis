@@ -9,7 +9,9 @@
 							</div>
 							<div class="row">
 								<div class="cold-md-12">
-									<div class="col-sm-6 m-b-xs text-right">
+									<div class="col-sm-6 m-b-xs text-justify">
+										<a href="<?php echo base_url().'index.php/report/operation_download/indexbranch/'.$branch.'/'.$startdate.'/'.$enddate; ?>" class="btn btn-sm btn-info" target="_blank">
+										Download Operation Report</a>
 									</div>
 									<div class="col-sm-6 m-b-xs text-right">
 										<form method="post" action="">
