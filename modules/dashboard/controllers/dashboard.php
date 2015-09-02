@@ -199,6 +199,18 @@ class Dashboard extends Front_Controller{
 				
 			}
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Dashboard'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 			
 			$this->template	->set('menu_title', 'Dashboard')
 							->set('agent_name', $this->session->userdata('agent_name'))
@@ -303,6 +315,18 @@ class Dashboard extends Front_Controller{
 				}
 			}
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Narative Report'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 			
 			$this->template	->set('menu_title', 'Dashboard')
 							->set('agent_name', $this->session->userdata('agent_name'))

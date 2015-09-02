@@ -66,6 +66,20 @@ class Group extends Front_Controller{
 				$group = $this->group_model->get_all_group( $config['per_page'] ,$page,$this->input->post('q'));	
 			}	
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Data Majelis')
 							->set('menu_group', 'active')
 							->set('group_total',$config['total_rows'])
@@ -130,6 +144,19 @@ class Group extends Front_Controller{
 				$group = $this->group_model->get_all_group( $config['per_page'] ,$page,$this->input->post('q'));	
 			}	
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         =>  '',
+							'activity_remarks'      => 'Browse Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 			$this->template	->set('menu_title', 'Data Majelis')
 							->set('menu_group', 'active')
 							->set('group_total',$config['total_rows'])
@@ -155,6 +182,20 @@ class Group extends Front_Controller{
 			$branch = $this->branch_model->get_all()->result();			
 			$area = $this->area_model->get_all()->result();
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Register Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Registrasi Majelis')
 							->set('officer', $officer)
 							->set('branch', $branch)
@@ -178,6 +219,21 @@ class Group extends Front_Controller{
 		$officer = $this->officer_model->get_all_officer( $config['per_page'] ,$page,$this->input->get('q'));
 		$branch = $this->branch_model->get_all()->result();			
 		$area = $this->area_model->get_all()->result();
+		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'Edit Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('data', $data)
 						->set('menu_title', 'Edit Majelis')
 						->set('officer', $officer)
@@ -197,6 +253,19 @@ class Group extends Front_Controller{
 		$clients_active = $this->clients_model->get_client_active($id)->result();
 		$clients_notactive = $this->clients_model->get_client_notactive($id)->result();
 		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'View Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 		$this->template	->set('data', $data)
 						->set('menu_title', 'Majelis')
 						->set('groupid', $id)
@@ -211,6 +280,19 @@ class Group extends Front_Controller{
 		$this->module = "group";
 		$id =  $this->uri->segment(3);
 			if($this->group_model->delete($id)){
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $id,
+							'activity_remarks'      => 'DELETE Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 				$this->session->set_flashdata('message', 'success|Majelis telah dihapus');
 				redirect('group/');
 				exit;
@@ -291,8 +373,32 @@ class Group extends Front_Controller{
 			);
 				
 			if(!$id){
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'INSERT Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->group_model->insert($data);
 			}else{
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'UPDATE Majelis'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->group_model->update($id, $data);
 			} 
 		}

@@ -46,7 +46,21 @@ class Jurnal extends Front_Controller{
 			
 			//$group = $this->jurnal_model->get_group()->result();	
 			$jurnal = $this->jurnal_model->get_all( $config['per_page'] ,$page,$this->input->get('q'));			
-				
+			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Jurnal Harian')
 							->set('menu_jurnal', 'active')
 							->set('group_total',$config['total_rows'])
@@ -95,7 +109,22 @@ class Jurnal extends Front_Controller{
 			
 			//$group = $this->jurnal_model->get_group()->result();	
 			$jurnal = $this->jurnal_model->get_all( $config['per_page'] ,$page,$this->input->get('q'));			
-				
+			
+			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Jurnal Harian')
 							->set('menu_jurnal', 'active')
 							->set('group_total',$config['total_rows'])
@@ -120,6 +149,20 @@ class Jurnal extends Front_Controller{
 			redirect($this->module.'/');
 		}
 		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Add Jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		//GET SPECIFIC PROJECT
 		$this->template	->set('data', $data)
 						->set('menu_title', 'Tambah Jurnal')
@@ -158,37 +201,37 @@ class Jurnal extends Front_Controller{
 			);
 				
 			if(!$id){
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'INSERT Jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->jurnal_model->insert($data);
 			}else{
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'UPDATE Jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->jurnal_model->update($id, $data);
 			} 
 		}
 	}
 	
-	public function download(){
-		//load our new PHPExcel library
-		$this->load->library('excel');
-	 
-		 $objPHPExcel = new PHPExcel();
 
-		$objPHPExcel->getProperties()->setCreator("Creator name");
-		$objPHPExcel->getProperties()->setLastModifiedBy("Creator name");
-		$objPHPExcel->getProperties()->setTitle("File Title");
-		$objPHPExcel->getProperties()->setSubject("Content Subject");
-		$objPHPExcel->getProperties()->setDescription("Content Description");
-		$objPHPExcel->setActiveSheetIndex(0);
-		$objPHPExcel->getActiveSheet()->setTitle('Sheet Title');
-			$objPHPExcel->getActiveSheet()->setCellValue('A1', "<b>This is just some text value</b>");
-			$objPHPExcel->getActiveSheet()->setCellValue('A2', 'This is just some text value');
-		$filename = 'sample_' . time() . '.xls'; //save our workbook as this file name
-		header('Content-Type: application/vnd.ms-excel'); //mime type
-		header('Content-Disposition: attachment;filename="' . $filename . '"'); //tell browser what's the file name
-		header('Cache-Control: max-age=0'); //no cache
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-		$objWriter->save('php://output');
-					 
-	
-	
-	}
 
 }

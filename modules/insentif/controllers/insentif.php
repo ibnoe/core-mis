@@ -24,7 +24,18 @@ class Insentif extends Front_Controller{
 			$total_rows = $this->officer_model->count_all($this->input->post('q'));				
 			$officer = $this->officer_model->get_all_officer();	
 			
-			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Laporan Kerja FO'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 					
 			$this->template	->set('menu_title', 'Laporan Kinerja FO')
 							->set('menu_konsolidasi', 'active')
@@ -135,7 +146,21 @@ class Insentif extends Front_Controller{
 				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}
-			//EXPORT	
+			//EXPORT
+
+			//ACTIVITY LOG
+			$log_data = array(
+					'activity_userid' 	    => $this->session->userdata['user_id'],
+					'activity_userbranch'   => $this->session->userdata['user_branch'],
+					'activity_module' 		=> $this->router->fetch_module(),
+					'activity_controller'   => $this->router->fetch_class(),
+					'activity_method'       => $this->router->fetch_method(),
+					'activity_data'         => '',
+					'activity_remarks'      => 'DOWNLOAD Laporan Kerja FO'
+			);
+			$log = $this->access_control->log_activity($log_data);
+			//END OF ACTIVITY LOG		
+					
 			$filename = "Laporan_Kinerja_FO_".$date."_" . time() . '.xls'; //save our workbook as this file name
 			header('Content-Type: application/vnd.ms-excel'); //mime type
 			header('Content-Disposition: attachment;filename="' . $filename . '"'); //tell browser what's the file name

@@ -43,6 +43,20 @@ class Clients_unreg extends Front_Controller    {
             $data['links'] = $this->pagination->create_links();
 			// $this->load->view('index', $data);
 			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Anggota Keluar'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Data Anggota Keluar')
 							->set('menu_client', 'active')
 							->set('clients', $data['clients'])
@@ -62,13 +76,36 @@ class Clients_unreg extends Front_Controller    {
         $id =  $this->uri->segment(3);
 		if ($this->clients_model->update_status($form_data,$id) == TRUE) 
            {
-                
+               //ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $id,
+							'activity_remarks'      => 'UPDATE Status Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 			   $this->session->set_flashdata('flash_message', 'Data berhasil update!'); 
 			   $this->session->set_flashdata('flash_status', 'success');
 			   redirect('clients_unreg/');
            }
         else
            {
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $id,
+							'activity_remarks'      => 'UPDATE Status Anggota Failed'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 			   $this->session->set_flashdata('flash_message', 'Data gagal update!'); 
 			   $this->session->set_flashdata('flash_status', 'danger');
 				 redirect('clients_unreg/');

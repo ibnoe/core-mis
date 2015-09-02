@@ -63,6 +63,19 @@ class Bukukas extends Front_Controller{
 			$no =  $this->uri->segment(3);
 			
 			$kaskecil = $this->kaskecil_model->get_all($config['per_page'] ,$page, $this->input->get('q'),$user_branch);
+			//ACTIVITY LOG
+			$log_data = array(
+					'activity_userid' 	    => $this->session->userdata['user_id'],
+					'activity_userbranch'   => $this->session->userdata['user_branch'],
+					'activity_module' 		=> $this->router->fetch_module(),
+					'activity_controller'   => $this->router->fetch_class(),
+					'activity_method'       => $this->router->fetch_method(),
+					'activity_data'         => 'log_data',
+					'activity_remarks'      => 'Browse Kas Kecil'
+			);
+			$log = $this->access_control->log_activity($log_data);
+			//END OF ACTIVITY LOG	
+			
 			//Build
 			$this->template	->set('menu_title', 'Kas Kecil')
 							->set('menu_jurnal', 'active')
@@ -89,6 +102,19 @@ class Bukukas extends Front_Controller{
 		}		
 		$account = $this->accounting_model->get_all_accounting_beban_child()->result();
 		
+			//ACTIVITY LOG
+			$log_data = array(
+					'activity_userid' 	    => $this->session->userdata['user_id'],
+					'activity_userbranch'   => $this->session->userdata['user_branch'],
+					'activity_module' 		=> $this->router->fetch_module(),
+					'activity_controller'   => $this->router->fetch_class(),
+					'activity_method'       => $this->router->fetch_method(),
+					'activity_data'         => 'log_data',
+					'activity_remarks'      => 'Browse Add Kas Kecil'
+			);
+			$log = $this->access_control->log_activity($log_data);
+			//END OF ACTIVITY LOG	
+			
 		$this->template	->set('data', $data)
 						->set('menu_title', 'Tambah Kas Kecil')
 						->set('menu_jurnal', 'active')
@@ -107,6 +133,21 @@ class Bukukas extends Front_Controller{
 		$data = $this->kaskecil_model->get_kaskecil_id($id)->result();
 		$data = $data[0];
 		$account = $this->accounting_model->get_all_accounting_beban_child()->result();
+		
+		//ACTIVITY LOG
+			$log_data = array(
+					'activity_userid' 	    => $this->session->userdata['user_id'],
+					'activity_userbranch'   => $this->session->userdata['user_branch'],
+					'activity_module' 		=> $this->router->fetch_module(),
+					'activity_controller'   => $this->router->fetch_class(),
+					'activity_method'       => $this->router->fetch_method(),
+					'activity_data'         => json_encode($data),
+					'activity_remarks'      => 'Edit Kas Kecil'
+			);
+			$log = $this->access_control->log_activity($log_data);
+			//END OF ACTIVITY LOG	
+			
+			
 		$this->template	->set('data', $data)
 						->set('menu_title', 'Edit Kas Kecil')
 						->set('menu_jurnal', 'active')
@@ -170,9 +211,20 @@ class Bukukas extends Front_Controller{
 						'jurnal_nobukti_nomor'	=> $this->input->post('kaskecil_nobukti_nomor'),	
 						'created_by'	   		=> $user_id,
 						'created_on'	   		=> $timestamps,
-					);				
+					);			
 					$this->jurnal_model->insert($data_jurnal);
-					
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data_jurnal),
+							'activity_remarks'      => 'INSERT kas kecil jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				//Add to KasKecil
 					$data = array(
 						'kaskecil_date'       	=> $this->input->post('kaskecil_date'),
@@ -188,6 +240,18 @@ class Bukukas extends Front_Controller{
 						'created_by'	   		=> $user_id,
 						'created_on'	   		=> $timestamps,				
 					);		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'INSERT kas kecil'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->kaskecil_model->insert($data);
 			}else{
 				$data = $this->kaskecil_model->get_kaskecil_id($id)->result();
@@ -210,7 +274,18 @@ class Bukukas extends Front_Controller{
 						'created_on'	   		=> $timestamps,
 					);				
 					$this->jurnal_model->update_jurnal($remark,$data_jurnal);
-					
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data_jurnal),
+							'activity_remarks'      => 'UPDTE kas kecil jurnal'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				//Edit KasKecil
 					$data = array(
 						'kaskecil_date'       	=> $this->input->post('kaskecil_date'),
@@ -224,7 +299,19 @@ class Bukukas extends Front_Controller{
 						'kaskecil_nobukti_nomor'	=> $this->input->post('kaskecil_nobukti_nomor'),	
 						'modified_by'	   		=> $user_id,
 						'modified_on'	   		=> $timestamps,				
-					);		
+					);	
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'UPDATE kas kecil'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->kaskecil_model->update($id, $data);
 			} 
 		}

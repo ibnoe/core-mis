@@ -3978,11 +3978,11 @@ class Accounting extends Front_Controller{
 			$date_week_before=$date_week_today-1;
 			
 			$week_today = getStartAndEndDate($date_week_today,$date_year_today);
-			$date_start=$this->uri->segment(4);
-			$date_end=$this->uri->segment(5);
+			$date_start=$this->uri->segment(3);
+			$date_end=$this->uri->segment(4);
 			if($date_start AND $date_end AND ($date_start <= $date_end )){
-				$date_start=$this->uri->segment(4);
-				$date_end=$this->uri->segment(5);
+				$date_start=$this->uri->segment(3);
+				$date_end=$this->uri->segment(4);
 			}else{
 				$date_start =$week_today[0];
 				$date_end = $week_today[1];			

@@ -71,7 +71,20 @@ class Clients extends Front_Controller{
 			$no =  $this->uri->segment(3);
 		
 			$clients = $this->clients_model->get_all_clients( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'));
-
+			
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => 'log_data',
+							'activity_remarks'      => 'Browse Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 			$this->template	->set('menu_title', 'Data Anggota')
 							->set('menu_client', 'active')
 							->set('clients', $clients)
@@ -96,6 +109,21 @@ class Clients extends Front_Controller{
 		$officer = $this->officer_model->get_all_officer();
 		$group = $this->group_model->get_all();
 		$investor = $this->clients_model->get_all_investors_list();
+		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => 'log_data',
+							'activity_remarks'      => 'Register Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('menu_title', 'Registrasi Anggota')
 							->set('client', $data)
 							->set('group', $group)
@@ -121,6 +149,21 @@ class Clients extends Front_Controller{
 		$officer = $this->officer_model->get_all_officer();
 		$group = $this->group_model->get_all();
 		$investor = $this->clients_model->get_all_investors_list();
+		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'Edit Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('client', $data)
 						->set('group', $group)
 						->set('officer', $officer)
@@ -136,6 +179,19 @@ class Clients extends Front_Controller{
 		$data = $this->clients_model->get_client($client_id)->result();
 		$data = $data[0];
 		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $client_id,
+							'activity_remarks'      => 'View Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 		$this->template	->set('client', $data)
 						->set('menu_title', 'View Anggota')
 						->set('menu_client', 'active')
@@ -215,11 +271,35 @@ class Clients extends Front_Controller{
 					'client_pembiayaan_sumber'	=> $this->input->post('client_pembiayaan_sumber')
 			);
 			
-			if(!$id)
+			if(!$id){
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'INSERT Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->clients_model->insert($data);
-			else
+			}else{
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'UPDATE Anggota'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->clients_model->update($id, $data);
-			 
+			}
 		}
 	}
 	
@@ -257,7 +337,21 @@ class Clients extends Front_Controller{
 			$no =  $this->uri->segment(3);
 		
 			$pembiayaan = $this->clients_pembiayaan_model->get_all( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'));
-
+			
+			//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 			$this->template	->set('menu_title', 'Pembiayaan')
 							->set('menu_client', 'active')
 							->set('pembiayaan', $pembiayaan)
@@ -295,6 +389,19 @@ class Clients extends Front_Controller{
 		//GET GROUP LIST
 		$group = $this->group_model->get_all();
 		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Browse Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
 		$this->template	->set('menu_title', 'Pembiayaan')
 						->set('client', $client)
 						->set('group', $group)
@@ -321,6 +428,20 @@ class Clients extends Front_Controller{
 		//GET GROUP LIST
 		$group = $this->group_model->get_all();
 		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Registrasi Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('menu_title', 'Pembiayaan')
 						->set('client', $client)
 						->set('group', $group)
@@ -357,6 +478,20 @@ class Clients extends Front_Controller{
 			redirect($this->module.'/summary/'.$client_id);
 		}
 		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         =>  '',
+							'activity_remarks'      => 'Edit Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('menu_title', 'Pembiayaan')
 						->set('client', $client)
 						->set('group', $group)
@@ -385,6 +520,19 @@ class Clients extends Front_Controller{
 		$officer = $this->officer_model->get_all_officer();
 		//GET GROUP LIST
 		$group = $this->group_model->get_all();
+		
+		//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $data_id,
+							'activity_remarks'      => 'View Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 		
 		$this->template	->set('menu_title', 'Pembiayaan')
 						->set('client', $client)
@@ -651,11 +799,35 @@ class Clients extends Front_Controller{
 					
 			);
 			
-			if(!$id)
+			if(!$id){
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'INSERT Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->clients_pembiayaan_model->insert($data);
-			else
+			}else{
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => json_encode($data),
+							'activity_remarks'      => 'UPDATE Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				return $this->clients_pembiayaan_model->update($id, $data);
-			 
+			}
 		}
 	}
 	
@@ -678,7 +850,18 @@ class Clients extends Front_Controller{
 					'data_status'	=> '0');
 					
 				$this->clients_pembiayaan_model->update($id, $data);
-				
+				//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => $id,
+							'activity_remarks'      => 'DELETE Pembiayaan'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
 				$this->session->set_flashdata('message', 'success|Anggota telah dihapus');
 				redirect('clients/summary/'.$client_id);
 				exit;
@@ -788,6 +971,20 @@ class Clients extends Front_Controller{
 		$tabwajib = $this->tabwajib_model->get_account($account_number);
 		$tabwajib = $tabwajib[0];
 		
+					//ACTIVITY LOG
+					$log_data = array(
+							'activity_userid' 	    => $this->session->userdata['user_id'],
+							'activity_userbranch'   => $this->session->userdata['user_branch'],
+							'activity_module' 		=> $this->router->fetch_module(),
+							'activity_controller'   => $this->router->fetch_class(),
+							'activity_method'       => $this->router->fetch_method(),
+							'activity_data'         => '',
+							'activity_remarks'      => 'Summary Pembiayaa'
+					);
+					$log = $this->access_control->log_activity($log_data);
+					//END OF ACTIVITY LOG	
+					
+					
 		$this->template	->set('menu_title', 'Data Anggota')
 						->set('client', $client)
 						->set('data_client', $client_id)

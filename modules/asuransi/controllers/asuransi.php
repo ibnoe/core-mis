@@ -28,6 +28,20 @@ class Asuransi extends Front_Controller{
 			//Cek User Login Branch
 			$user_branch = $this->session->userdata('user_branch');
 			
+			
+				//ACTIVITY LOG
+				$log_data = array(
+
+						'activity_userid' 	    => $this->session->userdata['user_id'],
+						'activity_userbranch'   => $this->session->userdata['user_branch'],
+						'activity_module' 		=> $this->router->fetch_module(),
+						'activity_controller'   => $this->router->fetch_class(),
+						'activity_method'       => $this->router->fetch_method(),
+						'activity_data'         => 'log_data',
+						'activity_remarks'      => 'Browse Asuransi'
+				);
+				$log = $this->access_control->log_activity($log_data);
+			
 			$total_rows = $this->asuransi_model->count_all();				
 			
 			//pagination
@@ -83,6 +97,19 @@ class Asuransi extends Front_Controller{
 			$asuransi = $this->asuransi_model->get_all_asuransi($total_rows,0);	
 			
 			
+				//SAMPLE USAGE ACTIVITY LOG
+				$log_data = array(
+
+						'activity_userid' 	    => $this->session->userdata['user_id'],
+						'activity_userbranch'   => $this->session->userdata['user_branch'],
+						'activity_module' 		=> $this->router->fetch_module(),
+						'activity_controller'   => $this->router->fetch_class(),
+						'activity_method'       => $this->router->fetch_method(),
+						'activity_data'         => 'log_data',
+						'activity_remarks'      => 'Download Laporan Asuransi'
+				);
+				$log = $this->access_control->log_activity($log_data);
+				
 			//load our new PHPExcel library
 			$this->load->library('excel');
 		 
@@ -178,8 +205,22 @@ class Asuransi extends Front_Controller{
 	
 	
 public function kirim(){	
+	
+				//SAMPLE USAGE ACTIVITY LOG
+				$log_data = array(
 
-//Cek User Login Branch
+						'activity_userid' 	    => $this->session->userdata['user_id'],
+						'activity_userbranch'   => $this->session->userdata['user_branch'],
+						'activity_module' 		=> $this->router->fetch_module(),
+						'activity_controller'   => $this->router->fetch_class(),
+						'activity_method'       => $this->router->fetch_method(),
+						'activity_data'         => 'log_data',
+						'activity_remarks'      => 'log_remarks'
+				);
+				$log = $this->access_control->log_activity($log_data);
+				
+				
+		//Cek User Login Branch
 			$user_branch = $this->session->userdata('user_branch');
 			$total_rows = $this->asuransi_model->count_all();				
 			$asuransi = $this->asuransi_model->get_all_asuransi($total_rows,0);	
