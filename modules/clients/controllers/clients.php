@@ -157,7 +157,7 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         => json_encode($data),
+							'activity_data'         => 'logdata',
 							'activity_remarks'      => 'Edit Anggota'
 					);
 					$log = $this->access_control->log_activity($log_data);
@@ -279,7 +279,7 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         => json_encode($data),
+							'activity_data'         => 'logdata',
 							'activity_remarks'      => 'INSERT Anggota'
 					);
 					$log = $this->access_control->log_activity($log_data);
@@ -293,7 +293,7 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         => json_encode($data),
+							'activity_data'         => 'logdata',
 							'activity_remarks'      => 'UPDATE Anggota'
 					);
 					$log = $this->access_control->log_activity($log_data);

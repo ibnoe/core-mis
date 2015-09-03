@@ -219,6 +219,7 @@ $user_level = $this->session->userdata('user_level');
 												<li><a href="<?php echo site_url(); ?>/report/finance"> <i class="fa fa-angle-right"></i>  <span>Finance</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/report/audit"> <i class="fa fa-angle-right"></i>  <span>Audit</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/report/operation"> <i class="fa fa-angle-right"></i>  <span>Operation</span></a></li>
+												<li><a href="<?php echo site_url(); ?>/report/presence"> <i class="fa fa-angle-right"></i>  <span>Presence</span></a></li>
 
 											</ul>
 										</li>
