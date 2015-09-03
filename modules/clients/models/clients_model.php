@@ -32,7 +32,7 @@ class clients_model extends MY_Model {
 		$this->db->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left');		
 		$this->db->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left');		
 		$this->db->join('tbl_area', 'tbl_area.area_id = tbl_group.group_area', 'left');	
-		$this->db->join('tbl_officer', 'tbl_officer.officer_id = tbl_clients.client_officer', 'left');
+		$this->db->join('tbl_officer', 'tbl_officer.officer_id = tbl_group.group_tpl', 'left');
 		$this->db->where('client_id', $id);		
 		return $this->db->get($this->table);
 	}
