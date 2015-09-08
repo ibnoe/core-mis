@@ -1934,8 +1934,8 @@ class Topsheet extends Front_Controller{
 				$objPHPExcel->getActiveSheet()->setCellValue("E$cell_no", $c->tsdaily_tabwajib);
 				$objPHPExcel->getActiveSheet()->setCellValue("F$cell_no", $c->tsdaily_tabungan_debet);
 				$objPHPExcel->getActiveSheet()->setCellValue("G$cell_no", $c->tsdaily_tabungan_credit);
-				$objPHPExcel->getActiveSheet()->setCellValue("H$cell_no", $c->tsdaily_tabungan_debet);
-				$objPHPExcel->getActiveSheet()->setCellValue("I$cell_no", $c->tsdaily_tabungan_credit);
+				$objPHPExcel->getActiveSheet()->setCellValue("H$cell_no", $c->tsdaily_tabungan_berjangka_debet);
+				$objPHPExcel->getActiveSheet()->setCellValue("I$cell_no", $c->tsdaily_tabungan_berjangka_credit);
 				$objPHPExcel->getActiveSheet()->setCellValue("J$cell_no", ($c->tsdaily_total_rf + $c->tsdaily_tabwajib));
 				$objPHPExcel->getActiveSheet()->setCellValue("K$cell_no", ($c->tsdaily_total_tabungan - $c->tsdaily_tabwajib));
 				$objPHPExcel->getActiveSheet()->setCellValue("L$cell_no", $c->tsdaily_total_tabungan + $c->tsdaily_total_rf);
