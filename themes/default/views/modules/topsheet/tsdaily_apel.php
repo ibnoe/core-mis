@@ -198,6 +198,8 @@ function namahari($date){
 							<td align="right"><b><?php echo number_format($total_tabwajib); ?></b></td>
 							<td align="right"><b><?php echo number_format($total_tabungan_debet); ?></b></td>
 							<td align="right"><b><?php echo number_format($total_tabungan_credit); ?></b></td>
+							<td align="right"><b><?php echo number_format($total_tabungan_berjangka_debet); ?></b></td>
+							<td align="right"><b><?php echo number_format($total_tabungan_berjangka_credit); ?></b></td>
 							<td align="right"><b><?php echo number_format($total_total_rf); ?></b></td>
 							<td align="right"><b><?php echo number_format($total_total_tabungan); ?></b></td>
 							<td align="right"><b><?php echo number_format($total_total_tabungan + $total_total_rf); ?></b></td>
