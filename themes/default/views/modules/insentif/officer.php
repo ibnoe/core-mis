@@ -19,6 +19,16 @@
 				<div class="col-sm-3 pull-right">
 					<div class="input-group">
 						<select name="q" class="input-sm form-control">
+							<option value="2015-10">2015-10</option>
+							<option value="2015-09">2015-09</option>
+							<option value="2015-08">2015-08</option>
+							<option value="2015-07">2015-07</option>
+							<option value="2015-06">2015-06</option>
+							<option value="2015-05">2015-05</option>
+							<option value="2015-04">2015-04</option>
+							<option value="2015-03">2015-03</option>
+							<option value="2015-02">2015-02</option>
+							<option value="2015-01">2015-01</option>
 							<option value="2014-12">2014-12</option>
 							<option value="2014-11">2014-11</option>
 							<option value="2014-10">2014-10</option>
