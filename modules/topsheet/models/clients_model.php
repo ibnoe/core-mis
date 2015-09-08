@@ -51,9 +51,9 @@ class clients_model extends MY_Model {
 		return $this->db
 						->join('tbl_pembiayaan', 'tbl_pembiayaan.data_id = tbl_clients.client_pembiayaan_id', 'left')
 						//->join('tbl_pembiayaan', 'tbl_pembiayaan.data_client = tbl_clients.client_id', 'left')
-						->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_client = tbl_clients.client_id', 'left')
-						->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_client = tbl_clients.client_id', 'left')
-						->join('tbl_tabberjangka', 'tbl_tabberjangka.tabberjangka_client = tbl_clients.client_id', 'left')
+						->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_account = tbl_clients.client_account', 'left')
+						->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_account = tbl_clients.client_account', 'left')
+						->join('tbl_tabberjangka', 'tbl_tabberjangka.tabberjangka_account = tbl_clients.client_account', 'left')
 						//->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_client = tbl_clients.client_account', 'left')
 						//->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_account = tbl_clients.client_account', 'left')
 						//->join('tbl_tabberjangka', 'tbl_tabberjangka.tabberjangka_account = tbl_clients.client_account', 'left')
