@@ -48,20 +48,32 @@ class target_officer_model extends MY_Model {
 
 	public function count_all_target($target_id, $branch='')
 	{
-		return $this->db->select("count(*) as numrows")
-						->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
-						->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
-						->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
-						->from($this->table)
-						->where('tbl_target_officer.target_officer_target_id', $target_id)
-						->where('tbl_target.deleted', '0')
-						->where('tbl_target_officer.deleted', '0')
-						 ->like('target_branch',$branch)
-						 //->like('area_name',$search)
-						 //->or_like('content',$search)
-						->get()
-						->row()
-						->numrows;
+		if($target_id){		
+			return $this->db->select("count(*) as numrows")
+							->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
+							->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
+							->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
+							->from($this->table)
+							->where('tbl_target_officer.target_officer_target_id', $target_id)
+							->where('tbl_target.deleted', '0')
+							->where('tbl_target_officer.deleted', '0')
+							 ->like('target_branch',$branch)
+							->get()
+							->row()
+							->numrows;
+		}else{
+			return $this->db->select("count(*) as numrows")
+							->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
+							->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
+							->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
+							->from($this->table)
+							->where('tbl_target.deleted', '0')
+							->where('tbl_target_officer.deleted', '0')
+							 ->like('target_branch',$branch)
+							->get()
+							->row()
+							->numrows;
+		}
 	}
 	
 	public function get_target_officer_by_id($id){

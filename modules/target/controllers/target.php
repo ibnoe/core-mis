@@ -64,7 +64,7 @@ class Target extends Front_Controller{
 			$target = $this->target_model->get_all( $config['per_page'] ,$page, $this->session->userdata['user_branch']);
 			//var_dump($target);			
 			$this->template	->set('menu_title', 'Target Operasional')
-							->set('menu_setting', 'active')
+							->set('menu_branch', 'active')
 							->set('target', $target)
 							->set('no', $no)
 							->set('config', $config)
@@ -86,7 +86,7 @@ class Target extends Front_Controller{
 		$branch_list  = $this->branch_model->get_all_branch(); //var_dump($branch_list);
 			
 		$this->template->set('menu_title', 'Add New Target Parameter')
-					   ->set('menu_setting', 'active')
+					   ->set('menu_branch', 'active')
 					   ->set('officer', $officer_list)
 					   ->set('branch', $branch_list)
 					   ->set('form_type', 'registration')
@@ -109,7 +109,7 @@ class Target extends Front_Controller{
 
 		$this->template	->set('target', $target)
 						->set('menu_title', 'Edit Target Parameter')
-						->set('menu_setting', 'active')
+						->set('menu_branch', 'active')
 						->set('officer', $officer_list)
 					    ->set('branch', $branch_list)
 						->set('form_type', 'edit')
@@ -189,7 +189,7 @@ class Target extends Front_Controller{
 			$target = $this->target_officer_model->get_all( $target_id, $this->session->userdata['user_branch']);
 			//var_dump($target);			
 			$this->template	->set('menu_title', 'Disposisi Target Operasional')
-							->set('menu_setting', 'active')
+							->set('menu_branch', 'active')
 							->set('target', $target)
 							->set('no', $no)
 							->set('config', $config)
@@ -218,7 +218,7 @@ class Target extends Front_Controller{
 
 		$this->template	->set('target', $target)
 						->set('menu_title', 'Disposisi Target')
-						->set('menu_setting', 'active')
+						->set('menu_branch', 'active')
 						->set('officer', $officer_list)
 					    ->set('branch', $branch_list)
 						->set('form_type', 'edit')
@@ -239,7 +239,7 @@ class Target extends Front_Controller{
 		
 		$this->template	->set('target', $target)
 						->set('menu_title', 'Disposisi Target')
-						->set('menu_setting', 'active')
+						->set('menu_branch', 'active')
 					    ->set('officer', $officer_list)
 						->set('form_type', 'edit')
 						->build('target_ops_disposisi_form');	
