@@ -13,18 +13,13 @@
 			<!-- TABLE HEADER -->
 			<div class="row text-sm wrapper">
 				<div class="col-sm-4 m-b-xs">
-					<a href="<?php echo site_url().'/setting/target_ops_register/'; ?>" class="btn btn-sm btn-info" >Add New Target Parameter</a>
+					
 				</div>
-				<form action="" method="post"> 
 				<div class="col-sm-3 pull-right">
 					<div class="input-group">
 						
-						<input type="text" name="q" class="input-sm form-control" placeholder="Search Target Parameter"> <span class="input-group-btn">
-						<button class="btn btn-sm btn-default" type="submit">Go!</button> </span> 
-						
 					</div>
 				</div>
-				</form>
 			</div>
 			
 			<div class="table-responsive">  
@@ -35,12 +30,12 @@
 						<th width="30px">No</th>
 						<th>Nama Target</th>
 						<th>Item Target</th>
-						<th class="hidden">Officer</th>
 						<th>Cabang</th>
-						<th class="text-right">Nilai</th>
+						<th>Nama FO</th>
+						<th class="text-right">Nilai Target</th>
+						<th class="text-right">Nilai Total Target</th>
 						<th>Tanggal Awal</th>
 						<th>Tanggal Akhir</th>
-						<th>Catatan</th>
 						<th width="80px" class="text-center">Manage</th>
 					  </tr>                  
 					</thead> 
@@ -85,13 +80,15 @@
 									else
 										echo ucfirst($t->branch_name); ?>
 									</td>
+							
+							<td><?php echo $t->officer_name; ?></td>
+							<td class="text-right"><?php echo number_format($t->target_officer_amount); ?></td>
 							<td class="text-right"><?php echo number_format($t->target_amount); ?></td>
 							<td><?php echo date('d M Y', strtotime($t->target_startdate)); ?></td>
 							<td><?php echo date('d M Y', strtotime($t->target_enddate)); ?></td>
-							<td><?php echo ucfirst($t->target_remarks); ?></td>
 							<td class="text-center">
-								<a href="<?php echo site_url()."/setting/target_ops_edit/".$t->target_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-								<a href="<?php echo site_url()."/setting/target_ops_delete/".$t->target_id; ?>" title="Delete" onclick="return confirmDialog();" ><i class="fa fa-trash-o"></i></a></td>
+								<a href="<?php echo site_url()."/target/target_ops_disposisi_edit/".$t->target_officer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+								<a href="<?php echo site_url()."/target/target_ops_disposisi_delete/".$t->target_officer_id; ?>" title="Delete" onclick="return confirmDialog();" ><i class="fa fa-trash-o"></i></a></td>
 						</tr>
 					<?php $no++; endforeach; ?>
 					</tbody>	

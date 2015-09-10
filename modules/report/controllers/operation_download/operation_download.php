@@ -305,6 +305,54 @@ class Operation_download extends Front_Controller{
 				$html .= '<td width="102px" align="right" style="background-color:#AAA8AA;"><b>'.number_format($akhir-$awal).'</b></td>';
 				$html .= '</tr>';
 
+				
+				//#PENCAIRAN
+				//TARGET
+				$html .= '<tr>';
+				$html .= '<td width="102px" align="center">Pencairan</td>';
+				$html .= '<td width="102px" align="center">Target</td>';
+				
+				$akumulasi_rerata_os_awal = 0;
+				for($i=0; $i<count($list_cabang); $i++) { 
+				
+					$target_pencairan_per_cabang[$i] = $this->operation_model->target_pencairan_by_branch_by_date("PBYN",$list_cabang[$i]['branch_id'], $enddate);					
+					$html .= '<td align="right">'.number_format($target_pencairan_per_cabang[$i]).'</td>';
+					$total_target_pencairan_per_cabang += $target_pencairan_per_cabang[$i];
+				}	
+				$html .= '<td width="102px" align="right"><b>'.number_format($total_target_pencairan_per_cabang).'</b></td>';
+				$html .= '</tr>';
+
+				//REALISASI
+				$html .= '<tr>';
+				$html .= '<td width="102px" align="center">&nbsp;</td>';
+				$html .= '<td width="102px" align="center">Realisasi</td>';
+				
+				$akumulasi_rerata_os_akhir = 0;
+				for($i=0; $i<count($list_cabang); $i++) { 
+					$realisasi_pencairan_per_cabang[$i] = $this->operation_model->realisasi_pencairan_by_branch_by_date($list_cabang[$i]['branch_id'], $startdate, $enddate);
+					$html .= '<td align="right">'.number_format($realisasi_pencairan_per_cabang[$i]).'</td>';
+					$total_realisasi_pencairan_per_cabang += $realisasi_pencairan_per_cabang[$i];
+				}	
+				$html .= '<td width="102px" align="right"><b>'.number_format($total_realisasi_pencairan_per_cabang).'</b></td>';
+				$html .= '</tr>';
+
+				//PENCAPAIAN
+				$html .= '<tr>';
+				$html .= '<td width="102px" align="center">&nbsp;</td>';
+				$html .= '<td width="102px" align="center">Pencapaian</td>';
+				
+				$akumulasi_rerata_os_akhir = 0;
+				for($i=0; $i<count($list_cabang); $i++) { 
+					$pencapaian_pencairan_per_cabang[$i] = $realisasi_pencairan_per_cabang[$i] / $target_pencairan_per_cabang[$i] * 100;
+					$html .= '<td align="right">'.number_format($pencapaian_pencairan_per_cabang[$i]).'%</td>';
+				}	
+				$total_pencapaian_pencairan_per_cabang = $total_realisasi_pencairan_per_cabang / $total_target_pencairan_per_cabang * 100;
+				$html .= '<td width="102px" align="right"><b>'.number_format($total_pencapaian_pencairan_per_cabang,0).'%</b></td>';
+				$html .= '</tr>';
+
+				
+				
+				
 				//#KOLEKTABILITAS (PAR) NASABAH
 				//MINGGU1
 				$html .= '<tr>';

@@ -585,5 +585,37 @@ class operation_model extends MY_Model {
 						->row()
 						->total_saldo;
 	}
+	
+	
+	public function target_pencairan_by_branch_by_date($item,$branch,$enddate){
+		
+		return $this->db->select('target_amount')
+					->from('tbl_target')->where('deleted', '0')
+					->where('target_item', $item)
+					->where('target_branch', $branch)
+					->where("target_enddate >= '".$enddate."'")
+					->order_by("target_enddate","asc")
+					->limit("1")
+					->get()
+					->row()
+					->target_amount;
+	}
+	
+	
+	
+	public function realisasi_pencairan_by_branch_by_date($branch,$startdate,$enddate){
+		
+		return $this->db->select('SUM(data_plafond) AS realisasi')
+					->from('tbl_pembiayaan')
+					->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+					->where('tbl_pembiayaan.deleted', '0')
+					->where('data_status', '1')
+					->where('client_branch', $branch)
+					->where("data_date_accept >='".$startdate."'")
+					->where("data_date_accept <='".$enddate."'")
+					->get()
+					->row()
+					->realisasi;
+	}
 
 }

@@ -202,7 +202,7 @@ class Setting extends Front_Controller{
 			$this->pagination->initialize($config);
 			$no =  $this->uri->segment(3);
 			
-			$target = $this->target_model->get_some_target_per_officer( $config['per_page'] ,$page,$this->input->post('q'));
+			$target = $this->target_model->get_all( $config['per_page'] ,$page, $this->session->userdata['user_branch']);
 			//var_dump($target);			
 			$this->template	->set('menu_title', 'Target Operasional')
 							->set('menu_setting', 'active')
@@ -270,26 +270,27 @@ class Setting extends Front_Controller{
 		//set form validation
 		$this->form_validation->set_rules('target_category', 'Kategori Target', 'required');
 		$this->form_validation->set_rules('target_item', 'Item Target', 'required');
-		$this->form_validation->set_rules('target_bydate', 'Jatuh Tempo Target', 'required');
+		$this->form_validation->set_rules('target_startdate', 'Tanggal Awal Target', 'required');
+		$this->form_validation->set_rules('target_enddate', 'Tanggal Akhir Target', 'required');
 	
 	
 		if($this->form_validation->run() === TRUE){
 			$data = array(
 					'target_category'   => $this->input->post('target_category'),
 					'target_item'       => $this->input->post('target_item'),
-					'target_officer'    => $this->input->post('target_officer'),
+					'target_officer'    => $this->session->userdata('user_id'),
 					'target_branch'     => $this->input->post('target_branch'),
 					'target_amount'     => $this->input->post('target_amount'),
-					'target_bydate'	    => $this->input->post('target_bydate'),
-					'target_remarks'    => $this->input->post('target_remarks'),
-					'created_by'        => $this->session->userdata('user_id')
+					'target_bydate'	    => $this->input->post('target_enddate'),
+					'target_startdate'	=> $this->input->post('target_startdate'),
+					'target_enddate'	=> $this->input->post('target_enddate'),
+					'target_remarks'    => $this->input->post('target_remarks')
 			);
-			$tid = $this->input->post('tid');
-			if(!$tid){
-				return $this->db->insert('tbl_target', $data);
+			$id = $this->input->post('target_id');
+			if(!$id){
+				return $this->target_model->insert($data);
 			}else{
-				$where = array('target_id' => $tid);
-				return $this->db->update('tbl_target', $data, $where);
+				return $this->target_model->update($id, $data);
 			} 
 		}
 	}

@@ -5,7 +5,7 @@
 								<li class="active">Operational Report</li>
 							</ul>
 							<div class="m-b-md">
-								<h3 class="m-b-none">Operational Report</h3>  <small>Welcome back, <?php echo $this->session->userdata('user_fullname');?></small> 
+								<h3 class="m-b-none">Operational Report</h3>
 							</div>
 							<section class="panel panel-default">
 								<div class="row m-l-none m-r-none bg-light lter">
@@ -56,7 +56,7 @@
 								<div class="col-md-12">
 									<!-- TABEL P.A.R -->
 									<section class="panel panel-default">
-										<header class="panel-heading font-bold">OPERATIONAL REVIEW REPORT PER <span style="color: blue;"><?php echo strtoupper($date_awal).' TO '.strtoupper($date_akhir); ?></span></header>
+										<header class="panel-heading font-bold">OPERATIONAL REVIEW REPORT PER <span style="color: blue;"><?php echo strtoupper($date_awal).'</span> TO <span style="color: blue;">'.strtoupper($date_akhir); ?></span></header>
 										<div class="panel-body">
 											<div>
 												
@@ -303,25 +303,28 @@
 														<td></td>
 														<td>a. Target Pencairan</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.'-'.'</td>' ?>
+														<?php $total_target_pencairan_per_cabang += $target_pencairan_per_cabang[$i]; ?>
+														<?php echo '<td align="right">'.number_format($target_pencairan_per_cabang[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo 'N/A'; ?></b></td>
+														<td align="right"><b><?php echo number_format($total_target_pencairan_per_cabang); ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. Realisasi Pencairan</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.'-'.'</td>' ?>
+														<?php $total_realisasi_pencairan_per_cabang += $realisasi_pencairan_per_cabang[$i]; ?>
+														<?php echo '<td align="right">'.number_format($realisasi_pencairan_per_cabang[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo 'N/A'; ?></b></td>
+														<td align="right"><b><?php echo number_format($total_realisasi_pencairan_per_cabang); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>c. Pencapaian Pencairan(%)</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.'-'.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($pencapaian_pencairan_per_cabang[$i], 0).'%</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo 'N/A'; ?></b></td>
+														<?php $total_pencapaian_pencairan_per_cabang = $total_realisasi_pencairan_per_cabang / $total_target_pencairan_per_cabang * 100; ?>
+														<td align="right"><b><?php echo number_format($total_pencapaian_pencairan_per_cabang,0); ?>%</b></td>
 													</tr>
 													<tr>
 														<td><b>9</b></td>

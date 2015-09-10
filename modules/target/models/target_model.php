@@ -55,11 +55,13 @@ class target_model extends MY_Model {
         return $this->db->get($this->table)->result();    
     }
 	
-	public function count_all_target($search='')
+	public function count_all_target($search='',$branch='')
 	{
 		return $this->db->select("count(*) as numrows")
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
 						->from($this->table)
-						->where('deleted','0')
+						->where('tbl_target.deleted','0')
+						->like('target_branch',$branch)
 						//->like('area_name',$search)
 						//->or_like('content',$search)
 						->get()

@@ -1,3 +1,7 @@
+<?php 
+$user_level = $this->session->userdata('user_level');
+?>
+
 <section class="main">
 	<div class="container">
 	
@@ -13,7 +17,9 @@
 			<!-- TABLE HEADER -->
 			<div class="row text-sm wrapper">
 				<div class="col-sm-4 m-b-xs">
-					<a href="<?php echo site_url().'/setting/target_ops_register/'; ?>" class="btn btn-sm btn-info" >Add New Target Parameter</a>
+					<?php if($user_level==1){ ?>
+					<a href="<?php echo site_url().'/target/target_ops_register/'; ?>" class="btn btn-sm btn-info" >Add New Target Parameter</a>
+					<?php } ?>
 				</div>
 				<form action="" method="post"> 
 				<div class="col-sm-3 pull-right">
@@ -41,6 +47,7 @@
 						<th>Tanggal Awal</th>
 						<th>Tanggal Akhir</th>
 						<th>Catatan</th>
+						<th width="80px" >Disposisi</th>
 						<th width="80px" class="text-center">Manage</th>
 					  </tr>                  
 					</thead> 
@@ -90,8 +97,13 @@
 							<td><?php echo date('d M Y', strtotime($t->target_enddate)); ?></td>
 							<td><?php echo ucfirst($t->target_remarks); ?></td>
 							<td class="text-center">
-								<a href="<?php echo site_url()."/setting/target_ops_edit/".$t->target_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-								<a href="<?php echo site_url()."/setting/target_ops_delete/".$t->target_id; ?>" title="Delete" onclick="return confirmDialog();" ><i class="fa fa-trash-o"></i></a></td>
+								<a href="<?php echo site_url()."/target/target_ops_officer/".$t->target_id; ?>" title="List Disposisi"><i class="fa fa-th-list"></i></a>
+								<a href="<?php echo site_url()."/target/target_ops_disposisi/".$t->target_id; ?>" title="Disposisi Target"><i class="fa fa-user"></i></a>
+								
+							</td>
+							<td class="text-center">
+								<a href="<?php echo site_url()."/target/target_ops_edit/".$t->target_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a> 
+								<a href="<?php echo site_url()."/target/target_ops_delete/".$t->target_id; ?>" title="Delete" onclick="return confirmDialog();" ><i class="fa fa-trash-o"></i></a></td>
 						</tr>
 					<?php $no++; endforeach; ?>
 					</tbody>	

@@ -26,7 +26,7 @@ class Operation extends Front_Controller{
 				if($this->input->post('filter') == '1'){
 					$branch = $this->input->post('branch');
 					if($this->input->post('startdate') == '')
-						{ $startdate = date('Y-m-d',strtotime('last day of previous month')); }
+						{ $startdate = date('Y-m-d',strtotime('first day of this month')); }
 					else 
 						{ $startdate = $this->input->post('startdate'); }
 					if($this->input->post('enddate') == '')
@@ -36,7 +36,7 @@ class Operation extends Front_Controller{
 				}
 				else{
 					$branch = '0';
-					$startdate = date('Y-m-d',strtotime('last day of previous month'));
+					$startdate = date('Y-m-d',strtotime('first day of this month'));
 					$enddate = date('Y-m-d',strtotime('now'));
 				}
 
@@ -103,6 +103,10 @@ class Operation extends Front_Controller{
 					$sum_par_per_cabang_minggu2[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '2');
 					$sum_par_per_cabang_minggu3[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '3');
 					$sum_par_per_cabang_minggu4[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '4');
+				
+					$target_pencairan_per_cabang[$i] = $this->operation_model->target_pencairan_by_branch_by_date("PBYN",$list_cabang[$i]['branch_id'], $enddate);
+					$realisasi_pencairan_per_cabang[$i] = $this->operation_model->realisasi_pencairan_by_branch_by_date($list_cabang[$i]['branch_id'], $startdate, $enddate);
+					$pencapaian_pencairan_per_cabang[$i] = $realisasi_pencairan_per_cabang[$i] / $target_pencairan_per_cabang[$i] * 100;
 				}
 				
 				//SAMPLE USAGE ACTIVITY LOG
@@ -164,7 +168,11 @@ class Operation extends Front_Controller{
 								->set('total_saldo_tabberjangka_awal', $total_saldo_tabberjangka_awal)		
 								->set('total_saldo_tabberjangka_akhir', $total_saldo_tabberjangka_akhir)
 								->set('total_saldo_tabberjangka_per_cabang_awal', $total_saldo_tabberjangka_per_cabang_awal)
-								->set('total_saldo_tabberjangka_per_cabang_akhir', $total_saldo_tabberjangka_per_cabang_akhir)	
+								->set('total_saldo_tabberjangka_per_cabang_akhir', $total_saldo_tabberjangka_per_cabang_akhir)
+				//				->set(target)
+								->set('target_pencairan_per_cabang', $target_pencairan_per_cabang)		
+								->set('realisasi_pencairan_per_cabang', $realisasi_pencairan_per_cabang)	
+								->set('pencapaian_pencairan_per_cabang', $pencapaian_pencairan_per_cabang)								
 				//				->set()			
 								->set('total_all_cabang',  $total_cabang)
 								->set('total_all_officer', $total_officer)
