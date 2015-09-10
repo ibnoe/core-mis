@@ -23,15 +23,26 @@ class target_officer_model extends MY_Model {
 	public function get_all($target_id,$branch=''){
 		
 		if($branch == 0){$branch = ""; }
-		$this->db->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
-				 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
-				 ->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
-				->where('tbl_target_officer.target_officer_target_id', $target_id)
-				 ->where('tbl_target.deleted', '0')
-				 ->where('tbl_target_officer.deleted', '0')
-				 ->like('target_branch',$branch)
-				 ->order_by('target_officer_id', 'DESC');
-        return $this->db->get($this->table)->result();    
+		if($target_id){		
+			$this->db->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
+					 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
+					 ->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
+					 ->where('tbl_target_officer.target_officer_target_id', $target_id)
+					 ->where('tbl_target.deleted', '0')
+					 ->where('tbl_target_officer.deleted', '0')
+					 ->like('target_branch',$branch)
+					 ->order_by('target_officer_id', 'DESC');
+			return $this->db->get($this->table)->result();    
+		}else{
+			$this->db->join('tbl_target', 'tbl_target.target_id = tbl_target_officer.target_officer_target_id', 'left')
+					 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_target.target_branch', 'left')
+					 ->join('tbl_officer', 'tbl_officer.officer_id = tbl_target_officer.target_officer_officer', 'left')
+					 ->where('tbl_target.deleted', '0')
+					 ->where('tbl_target_officer.deleted', '0')
+					 ->like('target_branch',$branch)
+					 ->order_by('target_officer_id', 'DESC');
+			return $this->db->get($this->table)->result();    
+		}
     }
 
 

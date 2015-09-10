@@ -245,6 +245,14 @@ class Target extends Front_Controller{
 						->build('target_ops_disposisi_form');	
 	}
 	
+	public function target_ops_disposisi_delete($id = '0'){
+		$tid = $this->uri->segment(3);
+			if($this->target_officer_model->delete($tid)){
+			   $this->session->set_flashdata('message', 'success|Disposisi target telah dihapus');
+				redirect('target/target_ops');
+			}
+	}	
+	
 	private function save_target_disposisi(){
 		//set form validation
 		$this->form_validation->set_rules('target_officer_officer', 'Field Officer', 'required');
