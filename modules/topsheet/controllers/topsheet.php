@@ -1901,6 +1901,8 @@ class Topsheet extends Front_Controller{
 					$total_tabwajib  		= 0;
 					$total_tabungan_debet  	= 0;
 					$total_tabungan_credit  = 0;
+					$total_tabungan_berjangka_debet  	= 0;
+					$total_tabungan_berjangka_credit  = 0;
 					$total_total_rf  		= 0;
 					$total_total_tabungan  	= 0;
 					$total_absen_h	= 0;
