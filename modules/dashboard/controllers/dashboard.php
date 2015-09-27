@@ -74,7 +74,7 @@ class Dashboard extends Front_Controller{
 				
 				
 				
-				
+				*/
 				//portfolio sektor pembiayaan
 				$total_sektor=0;
 				for($i=1;$i<=8;$i++){
@@ -84,7 +84,7 @@ class Dashboard extends Front_Controller{
 				for($i=1;$i<=8;$i++){
 					$total_sektor_pembiayaan_persen[$i]=$total_sektor_pembiayaan[$i] / $total_sektor * 100;					
 				}
-				*/
+				
 				
 				//portfolio pembiayaan
 				$total_pembiayaan_aktif_ke_1=$this->dashboard_model->count_pembiayaan_aktif(1,$user_branch);

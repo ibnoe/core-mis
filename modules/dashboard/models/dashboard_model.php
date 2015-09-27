@@ -199,7 +199,13 @@ class dashboard_model extends MY_Model {
 	
 	public function count_sektor_pembiayaan($sector,$branch='')
 	{
-		$query= $this->db->query("SELECT * FROM  tbl_pembiayaan JOIN tbl_clients ON tbl_clients.client_id=tbl_pembiayaan.data_client WHERE tbl_clients.client_branch LIKE '%$branch%' AND tbl_pembiayaan.deleted='0' AND tbl_pembiayaan.data_status='1' AND  tbl_pembiayaan.data_sector='$sector'");
+		$query= $this->db->query("SELECT * FROM  tbl_clients JOIN tbl_pembiayaan ON tbl_pembiayaan.data_id=tbl_clients.client_pembiayaan_id 
+								WHERE tbl_clients.client_branch LIKE '%$branch%' 
+								AND tbl_pembiayaan.deleted='0' 
+								AND tbl_pembiayaan.data_sector='$sector'
+								AND tbl_clients.deleted='0'
+								AND tbl_clients.client_status='1'
+								");
 		return $query->num_rows();  
 	}
 	
