@@ -91,6 +91,7 @@ $user_level = $this->session->userdata('user_level');
 										<li><a href="<?php echo site_url();?>/switchbranch/cabang/3">Cabang Bojong</a></li>
 										<li><a href="<?php echo site_url();?>/switchbranch/cabang/5">Cabang Tenjo</a></li>
 										<li><a href="<?php echo site_url();?>/switchbranch/cabang/6">Cabang Cangkuang</a></li> 
+										<li><a href="<?php echo site_url();?>/switchbranch/cabang/7">Cabang Pengalengan</a></li> 
 									</ul>
 									
 									<?php } ?>

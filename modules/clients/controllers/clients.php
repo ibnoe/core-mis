@@ -485,7 +485,7 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         =>  '',
+							'activity_data'         =>  "Client ID : $client_id",
 							'activity_remarks'      => 'Edit Pembiayaan'
 					);
 					$log = $this->access_control->log_activity($log_data);
@@ -528,7 +528,7 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         => $data_id,
+							'activity_data'         => "CLIENT : $client_id , PEMBIAYAAN : $data_id ",
 							'activity_remarks'      => 'View Pembiayaan'
 					);
 					$log = $this->access_control->log_activity($log_data);
@@ -978,8 +978,8 @@ class Clients extends Front_Controller{
 							'activity_module' 		=> $this->router->fetch_module(),
 							'activity_controller'   => $this->router->fetch_class(),
 							'activity_method'       => $this->router->fetch_method(),
-							'activity_data'         => '',
-							'activity_remarks'      => 'Summary Pembiayaa'
+							'activity_data'         => "CLIENT : $id",
+							'activity_remarks'      => 'Summary Pembiayaan'
 					);
 					$log = $this->access_control->log_activity($log_data);
 					//END OF ACTIVITY LOG	
