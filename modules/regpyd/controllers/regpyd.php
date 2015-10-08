@@ -106,7 +106,7 @@ class Regpyd extends Front_Controller{
 			$objPHPExcel->getActiveSheet()->getStyle("A1")->applyFromArray(array("font" => array( "bold" => true, 'size'  => 16)));
 			$objPHPExcel->getActiveSheet()->getStyle("A2")->applyFromArray(array("font" => array( "bold" => true)));
 			//TOP ROW
-			$objPHPExcel->getActiveSheet()->getStyle("A4:AC4")->applyFromArray(array("font" => array( "bold" => true)));
+			$objPHPExcel->getActiveSheet()->getStyle("A4:AD4")->applyFromArray(array("font" => array( "bold" => true)));
 			$objPHPExcel->getActiveSheet()->getStyle("F4:G4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 			$objPHPExcel->getActiveSheet()->getStyle("L4:L4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 			$objPHPExcel->getActiveSheet()->getStyle("N4:O4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);			
@@ -140,6 +140,7 @@ class Regpyd extends Front_Controller{
 			$objPHPExcel->getActiveSheet()->setCellValue("AA4", "CHI (Nilai)");
 			$objPHPExcel->getActiveSheet()->setCellValue("AB4", "CHI (Kategori)");
 			$objPHPExcel->getActiveSheet()->setCellValue("AC4", "DATABASE");
+			$objPHPExcel->getActiveSheet()->setCellValue("AD4", "INVESTOR");
 			
 			
 			$no=1;
@@ -207,6 +208,7 @@ class Regpyd extends Front_Controller{
 				$objPHPExcel->getActiveSheet()->setCellValue("AA$cell", $p->data_rmc_total);
 				$objPHPExcel->getActiveSheet()->setCellValue("AB$cell", $p->data_rmc_kategori);
 				$objPHPExcel->getActiveSheet()->setCellValue("AC$cell", $database);
+				$objPHPExcel->getActiveSheet()->setCellValue("AD$cell", $c->lender_name);
 				
 				$objPHPExcel->getActiveSheet()->getStyle("F$cell:G$cell")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 				$objPHPExcel->getActiveSheet()->getStyle("L$cell:L$cell")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);

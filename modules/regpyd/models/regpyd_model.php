@@ -58,6 +58,7 @@ class regpyd_model extends MY_Model {
 						->from('tbl_clients')
 						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
 						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_lenders', 'tbl_lenders.lender_id = tbl_clients.client_pembiayaan_sumber', 'left')
 						->where('tbl_clients.deleted','0')
 						->where('tbl_clients.client_status','1')
 						->order_by('branch_name','ASC')
