@@ -130,6 +130,7 @@ class Konsolidasi extends Front_Controller{
 			$date_end=$this->input->post('date_end');
 			if($date_start AND $date_end AND ($date_start <= $date_end )){
 				$date_start=$this->input->post('date_start');
+				$date_start = "2013-01-01";
 				$date_end=$this->input->post('date_end');
 			}else{
 				//$date_start =$week_today[0];
