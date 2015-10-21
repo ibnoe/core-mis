@@ -348,6 +348,8 @@ class Topsheet extends Front_Controller{
 			$tr_tabwajib_credit 	= $c->tr_tabwajib_credit;
 			$tr_tabsukarela_debet 	= $c->tr_tabsukarela_debet;
 			$tr_tabsukarela_credit 	= $c->tr_tabsukarela_credit;
+			$tr_tabberjangka_debet 	= $c->tr_tabberjangka_debet;
+			$tr_tabberjangka_credit 	= $c->tr_tabberjangka_credit;
 		
 			//UPDATE tbl_pembiayaan			
 				//Get Pembiayaan Actual
@@ -526,7 +528,7 @@ class Topsheet extends Front_Controller{
 				$frek = $this->input->post("data_freq_".$i);
 				$angsuranke = $this->input->post("data_angsuranke_".$i)-1; //dikurangi 1 karena di view sudah di +1
 				if($angsuranke < 0) { $angsuranke = 0;}
-				$pertemuanke = $this->input->post("data_pertemuanke_".$i);
+				$pertemuanke = $this->input->post("data_pertemuanke_".$i) + 1;
 				if($frek>=1){				
 					$angsuranke = $angsuranke + $frek;
 					$ts_freq_total += $frek;
