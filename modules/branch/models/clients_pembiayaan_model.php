@@ -386,4 +386,152 @@ class clients_pembiayaan_model extends MY_Model {
         $this->db->where('data_id', $id);
         $this->db->update($this->table, $data);
     } 
+	
+	
+	
+	
+	public function get_all_monitoring($limit, $offset, $search='', $key='')
+	{
+		if($search != '')
+		{
+			return $this->db->select('*')
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->like("client_$key",$search)
+						->limit($limit,$offset)
+						->order_by('data_id','DESC')
+						->get()
+						->result();
+		}else{		
+			return $this->db->select('*')
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.data_monitoring_pembiayaan','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->limit($limit,$offset)
+						->order_by('data_id','DESC')
+						->get()
+						->result();
+		}
+	}
+	
+	public function get_all_monitoring_by_branch($limit, $offset, $search='', $key='', $branch)
+	{
+		if($search != '')
+		{
+			return $this->db->select('*')
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_clients.client_branch',$branch)
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->like("client_$key",$search)
+						->limit($limit,$offset)
+						->order_by('data_id','DESC')
+						->get()
+						->result();
+		}else
+		{		
+			return $this->db->select('*')
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_clients.client_branch',$branch)
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.data_monitoring_pembiayaan','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->limit($limit,$offset)
+						->order_by('data_id','DESC')
+						->get()
+						->result();
+		}
+	}
+	
+	public function count_all_monitoring_by_branch($key,$search,$branch)
+	{
+		if($search != ''){
+			return $this->db->select("count(*) as numrows")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_clients.client_branch',$branch)
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->like("client_$key",$search)
+						//->or_like('content',$search)
+						->get()
+						->row()
+						->numrows;
+		}else{
+			return $this->db->select("count(*) as numrows")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_clients.client_branch',$branch)
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.data_monitoring_pembiayaan','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->where('tbl_clients.client_pembiayaan_status','1')
+						->where('tbl_clients.client_status','1')
+						->get()
+						->row()
+						->numrows;			
+		}	
+	}
+	public function count_all_monitoring($key,$search)
+	{
+		if($search != ''){
+			return $this->db->select("count(*) as numrows")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.data_monitoring_pembiayaan','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->where('tbl_clients.client_pembiayaan_status','1')
+						->where('tbl_clients.client_status','1')
+						->like("client_$key",$search)
+						//->or_like('content',$search)
+						->get()
+						->row()
+						->numrows;
+		}else{
+			return $this->db->select("count(*) as numrows")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->join('tbl_sector', 'tbl_sector.sector_id = tbl_pembiayaan.data_sector', 'left')
+						->where('tbl_pembiayaan.data_status','1')
+						->where('tbl_pembiayaan.data_monitoring_pembiayaan','1')
+						->where('tbl_pembiayaan.deleted','0')
+						->where('tbl_clients.client_pembiayaan_status','1')
+						->where('tbl_clients.client_status','1')
+						->get()
+						->row()
+						->numrows;			
+		}
+		
+		
+	}
 }

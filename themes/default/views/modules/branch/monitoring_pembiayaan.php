@@ -94,9 +94,9 @@ $user_level = $this->session->userdata('user_level');
 									<?php if($c->data_monitoring_pembiayaan == "0"){  ?>
 									<a href="#modal" data-toggle="modal" id="modalbtn_<?php echo $no; ?>" title=""><i class="fa fa-calendar"></i></a>
 									<?php }elseif($c->data_monitoring_pembiayaan == "1"){  ?>
-									<a href="#modal" data-toggle="modal" id="modalbtn_<?php echo $no; ?>" title=""><i class="fa fa-check text-success"></i></a>
+									<a href="#modal" data-toggle="modal" id="modalbtn_<?php echo $no; ?>" title=""><i class="fa fa-warning text-danger"></i></a>
 									<?php }elseif($c->data_monitoring_pembiayaan == "2"){  ?>
-									<a href="#modal" data-toggle="modal" id="modalbtn_<?php echo $no; ?>" title=""><i class="fa fa-times text-danger"></i></a>
+									<a href="#modal" data-toggle="modal" id="modalbtn_<?php echo $no; ?>" title=""><i class="fa fa-check text-success"></i></a>
 									<?php } ?>
 								</td>
 								<?php } ?>
@@ -171,14 +171,20 @@ $(document).ready(function() {
 										hasil+="<tr><td width='140px'>Pembiayaan Ke</td><td> : "+val.data_ke+"</td></tr>";
 										hasil+="<tr><td>Tujuan</td><td> : "+val.data_tujuan+" </td></tr>";
 										if(val.data_monitoring_pembiayaan == 1){
-											hasil+="<tr><td>Tanggal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='"+val.data_monitoring_pembiayaan_date+"' /></td></tr>";
-											hasil+="<tr><td>Hasil Monitoring</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' checked /> OK &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' /> NOK </td></tr>";											
+											hasil+="<tr><td>Tanggal Awal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='"+val.data_monitoring_pembiayaan_date+"' /></td></tr>";
+											hasil+="<tr><td>Tanggal Akhir Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date_end' value='"+val.data_monitoring_pembiayaan_date_end+"' /></td></tr>";
+											hasil+="<tr><td>Status</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' checked /> Monitoring &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' /> Not Monitoring </td></tr>";											
+											hasil+="<tr><td>Hasil Monitoring<</td><td> : <input type='text' name='data_monitoring_pembiayaan_result' value='"+val.data_monitoring_pembiayaan_result+"' /></td></tr>";
 										}else if(val.data_monitoring_pembiayaan == 2){
-											hasil+="<tr><td>Tanggal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='"+val.data_monitoring_pembiayaan_date+"' /></td></tr>";
-											hasil+="<tr><td>Hasil Monitoring</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' /> OK &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' checked /> NOK </td></tr>";											
+											hasil+="<tr><td>Tanggal Awal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='"+val.data_monitoring_pembiayaan_date+"' /></td></tr>";
+											hasil+="<tr><td>Tanggal Akhir Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date_end' value='"+val.data_monitoring_pembiayaan_date_end+"' /></td></tr>";
+											hasil+="<tr><td>Status</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' /> Monitoring &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' checked /> Not Monitoring </td></tr>";											
+											hasil+="<tr><td>Hasil Monitoring<</td><td> : <input type='text' name='data_monitoring_pembiayaan_result' value='"+val.data_monitoring_pembiayaan_result+"' /></td></tr>";
 										}else{
-											hasil+="<tr><td>Tanggal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='<?php echo date("Y-m-d");?>' /></td></tr>";
-											hasil+="<tr><td>Hasil Monitoring</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' checked /> OK &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' /> NOK </td></tr>";
+											hasil+="<tr><td>Tanggal Awal Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date' value='<?php echo date("Y-m-d");?>' /></td></tr>";
+											hasil+="<tr><td>Tanggal Akhir Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_date_end' value='-' /></td></tr>";
+											hasil+="<tr><td>Status</td><td> : <input type='radio' name='data_monitoring_pembiayaan' value='1' checked /> Monitoring &nbsp;&nbsp; <input type='radio' name='data_monitoring_pembiayaan' value='2' /> Not Monitoring </td></tr>";
+											hasil+="<tr><td>Hasil Monitoring</td><td> : <input type='text' name='data_monitoring_pembiayaan_result' value='-' /></td></tr>";
 										}
 										hasil+="</table>";
 									});

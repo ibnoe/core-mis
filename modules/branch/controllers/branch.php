@@ -1631,9 +1631,9 @@ class Branch extends Front_Controller{
 			$user_branch = $this->session->userdata('user_branch');	
 			//Get Total Pengajuan 
 			if($user_branch != 0){
-				$total_rows = $this->clients_pembiayaan_model->count_all_pencairan_by_branch($this->input->get('q'),$user_branch);
+				$total_rows = $this->clients_pembiayaan_model->count_all_monitoring_by_branch($this->input->post('key'),$this->input->get('q'),$user_branch);
 			}else{
-				$total_rows = $this->clients_pembiayaan_model->count_all_pencairan($this->input->get('q'));
+				$total_rows = $this->clients_pembiayaan_model->count_all_monitoring($this->input->post('key'),$this->input->get('q'));
 			}			
 			
 				
@@ -1664,9 +1664,9 @@ class Branch extends Front_Controller{
 			$no =  $this->uri->segment(3);
 			
 			if($user_branch != 0){
-				$clients = $this->clients_pembiayaan_model->get_all_pencairan_by_branch( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'), $user_branch);
+				$clients = $this->clients_pembiayaan_model->get_all_monitoring_by_branch( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'), $user_branch);
 			}else{
-				$clients = $this->clients_pembiayaan_model->get_all_pencairan( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'));
+				$clients = $this->clients_pembiayaan_model->get_all_monitoring( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'));
 			}			
 			
 			//ACTIVITY LOG
@@ -1704,6 +1704,8 @@ class Branch extends Front_Controller{
 		$data = array(
 			'data_monitoring_pembiayaan'    	 => $this->input->post("data_monitoring_pembiayaan"),
 			'data_monitoring_pembiayaan_date'   => $this->input->post("data_monitoring_pembiayaan_date"),
+			'data_monitoring_pembiayaan_date_end'   => $this->input->post("data_monitoring_pembiayaan_date_end"),
+			'data_monitoring_pembiayaan_result'   => $this->input->post("data_monitoring_pembiayaan_result"),
 			'modified_by'   => $user_id		
 		);
 		if($this->input->post("data_monitoring_pembiayaan_date")){
