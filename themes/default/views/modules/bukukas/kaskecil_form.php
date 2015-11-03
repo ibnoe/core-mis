@@ -42,6 +42,7 @@
 												<option value="2" <?php if($user_branch == "2") { echo "selected"; }?>>Kemang</option>
 												<option value="5" <?php if($user_branch == "5") { echo "selected"; }?>>Tenjo</option>
 												<option value="6" <?php if($user_branch == "6") { echo "selected"; }?>>Cangkuang</option>
+												<option value="7" <?php if($user_branch == "7") { echo "selected"; }?>>Pangalengan</option>
 											</select>
 								</div>
 							</div>
