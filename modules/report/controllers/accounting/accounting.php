@@ -81,9 +81,11 @@ class Accounting extends Front_Controller{
 				$account_credit = 0;
 				$account_saldo = 0;
 				$saldo_awal =0;
-				
+			
+			$colspan = $total_branch+2; 
+			$colspan2 = $total_branch+3; 
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 								
 				//4010000 Pendapatan Pembiayaan
@@ -136,8 +138,8 @@ class Accounting extends Front_Controller{
 				//---------------------------------------------------------------------------------------------
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Biaya Langsung</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Biaya Langsung</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Dana Pinjaman Bank
 				$code = "5010200";
@@ -202,7 +204,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '	</tr>';	
 				
-				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="'.$colspan.'"> &nbsp;</td></tr>';
 				
 				//Laba Rugi Kotor		
 				$account_labarugi_kotor_konsolidasi = $account_pendapatan_konsolidasi - $account_biaya_langsung_konsolidasi;
@@ -220,8 +222,8 @@ class Accounting extends Front_Controller{
 				//---------------------------------------------------------------------------------------------
 				
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Lainnya: 5030101, 5030102, 5030103, 5030104, 5030105, 5030106, 5030108, 5030109, 5030110, 5030111, 5030112, 5030113, 5030114 
 				
@@ -903,7 +905,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '	</tr>';	
 				
-				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="'.$colspan.'"> &nbsp;</td></tr>';
 				
 				//Laba (Rugi) Operasi
 				$account_LR_operasi_konsolidasi = $account_labarugi_kotor_konsolidasi - $account_beban_operasi_konsolidasi;
@@ -919,9 +921,9 @@ class Accounting extends Front_Controller{
 				//Pendapatan Diluar Usaha
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Pendapatan & Beban Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
-				$print .= '	<tr><td align="left" ><b>Pendapatan Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Pendapatan & Beban Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>Pendapatan Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Pendapatan Bunga Bank
 				$code = "4030005";
@@ -1014,8 +1016,8 @@ class Accounting extends Front_Controller{
 				//Beban Diluar Usaha
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Beban Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Beban Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Bunga Bank
 				$code = "5090004";
@@ -1222,7 +1224,7 @@ class Accounting extends Front_Controller{
 				
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"> &nbsp;</td></tr>';
 				
 				
 				//---------------------------------------------------------------------------------------------
@@ -1241,7 +1243,7 @@ class Accounting extends Front_Controller{
 				$print .= '</tr>';
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				
 				//Pajak Penghasilan Badan
 				$code = "5050004";
@@ -1263,7 +1265,7 @@ class Accounting extends Front_Controller{
 				
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				
 				//Laba (Rugi) Bersih
 				$account_LR_bersih_konsolidasi = $account_LR_sebelum_pajak_konsolidasi - $account_5050004_total;
@@ -1317,8 +1319,12 @@ class Accounting extends Front_Controller{
 						<th class="text-center">Kemang</th>
 						<th class="text-center">Tenjo</th>
 						<th class="text-center">Cangkuang</th>
+						<th class="text-center">Pangalengan</th>
 					  </tr>'; 
 			
+			
+			$colspan = $total_branch+2; 
+			$colspan2 = $total_branch+3; 
 			
 			//Cek User Branch
 			$user_branch = $this->session->userdata('user_branch');
@@ -1367,7 +1373,7 @@ class Accounting extends Front_Controller{
 				$saldo_awal =0;
 				
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 								
 				//4010000 Pendapatan Pembiayaan
@@ -1420,8 +1426,8 @@ class Accounting extends Front_Controller{
 				//---------------------------------------------------------------------------------------------
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Biaya Langsung</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Biaya Langsung</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Dana Pinjaman Bank
 				$code = "5010200";
@@ -1486,7 +1492,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '	</tr>';	
 				
-				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="'.$colspan.'"> &nbsp;</td></tr>';
 				
 				//Laba Rugi Kotor		
 				$account_labarugi_kotor_konsolidasi = $account_pendapatan_konsolidasi - $account_biaya_langsung_konsolidasi;
@@ -1503,8 +1509,8 @@ class Accounting extends Front_Controller{
 				//---------------------------------------------------------------------------------------------
 				
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Lainnya: 5030101, 5030102, 5030103, 5030104, 5030105, 5030106, 5030108, 5030109, 5030110, 5030111, 5030112, 5030113, 5030114 
 				
@@ -2139,7 +2145,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '	</tr>';	
 				
-				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="'.$colspan.'"> &nbsp;</td></tr>';
 				
 				//Laba (Rugi) Operasi
 				$account_LR_operasi_konsolidasi = $account_labarugi_kotor_konsolidasi - $account_beban_operasi_konsolidasi;
@@ -2155,9 +2161,9 @@ class Accounting extends Front_Controller{
 				//Pendapatan Diluar Usaha
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Pendapatan & Beban Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
-				$print .= '	<tr><td align="left" ><b>Pendapatan Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Pendapatan & Beban Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>Pendapatan Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Pendapatan Bunga Bank
 				$code = "4030005";
@@ -2250,8 +2256,8 @@ class Accounting extends Front_Controller{
 				//Beban Diluar Usaha
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Beban Diluar Usaha</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Beban Diluar Usaha</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Bunga Bank
 				$code = "5090004";
@@ -2421,7 +2427,7 @@ class Accounting extends Front_Controller{
 				
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"> &nbsp;</td></tr>';
 				
 				
 				//---------------------------------------------------------------------------------------------
@@ -2440,7 +2446,7 @@ class Accounting extends Front_Controller{
 				$print .= '</tr>';
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				
 				//Pajak Penghasilan Badan
 				$code = "5050004";
@@ -2460,7 +2466,7 @@ class Accounting extends Front_Controller{
 				
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				
 				//Laba (Rugi) Bersih
 				$account_LR_bersih_konsolidasi = $account_LR_sebelum_pajak_konsolidasi - $account_5050004_total;
@@ -2503,6 +2509,9 @@ class Accounting extends Front_Controller{
 		if($this->session->userdata('logged_in'))
 		{
 			$total_branch = $this->branch_model->count_branch();
+			
+			$colspan = $total_branch+2; 
+			$colspan2 = $total_branch+3; 
 			
 			//Cek User Branch
 			$user_branch = $this->session->userdata('user_branch');
@@ -2554,8 +2563,8 @@ class Accounting extends Front_Controller{
 			//ASET LANCAR
 			//----------------------------------------------------------------------------------------
 			
-			$print .= '	<tr><td align="left" ><b>ASET</b></td>	<td colspan="8" ></td></tr>';
-			$print .= '	<tr><td align="left" ><b>Aset Lancar</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>ASET</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Aset Lancar</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 								
 				//1010000 Kas Teller
@@ -2841,8 +2850,8 @@ class Accounting extends Front_Controller{
 			//ASET TIDAK LANCAR
 			//----------------------------------------------------------------------------------------
 			
-			$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
-			$print .= '	<tr><td align="left" ><b>Aset Tidak Lancar</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Aset Tidak Lancar</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 				//Aset Lain-lain : 1090201 - 1090202
 				$code = "1090201";
@@ -2877,8 +2886,8 @@ class Accounting extends Front_Controller{
 			//ASET TETAP
 			//----------------------------------------------------------------------------------------
 			
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
-				$print .= '	<tr><td align="left" ><b>Aset Tetap</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>Aset Tetap</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				
 				//Aset Tanah : 1080101
@@ -2963,7 +2972,7 @@ class Accounting extends Front_Controller{
 				$print .= '</tr>';
 				
 								
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Akumulasi Penyusutan Aset Tetap : 1080302
 				$code = "1080302";
@@ -2993,7 +3002,7 @@ class Accounting extends Front_Controller{
 				//----------------------------------------------------------------------------------------
 				//Total Aset Tidak Lancar
 				//----------------------------------------------------------------------------------------
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				$account_aset_tidak_lancar_total_konsolidasi = $account_aset_tetap_bersih_total_konsolidasi + $account_aset_lain_konsolidasi;
 				$print .= '	<tr><td align="left" class=""><b>Total Aset Tidak Lancar</b></td>';
 				$print .= '	<td align="right" class="border_btm">'.($account_aset_tidak_lancar_total_konsolidasi < 0 ? "(".number_format(abs($account_aset_tidak_lancar_total_konsolidasi)).")" : number_format($account_aset_tidak_lancar_total_konsolidasi)).'</td>';
@@ -3006,7 +3015,7 @@ class Accounting extends Front_Controller{
 				//----------------------------------------------------------------------------------------
 				//TOTAL ASET
 				//----------------------------------------------------------------------------------------
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				$account_aset_total_konsolidasi = $account_aset_tidak_lancar_total_konsolidasi + $account_aset_lancar_konsolidasi;
 				$print .= '	<tr><td align="left" ><b>TOTAL ASET</b></td>';
 				$print .= '	<td align="right" class="border_btm"><b>'.($account_aset_total_konsolidasi < 0 ? "(".number_format(abs($account_aset_total_konsolidasi)).")" : number_format($account_aset_total_konsolidasi)).'</b></td>';
@@ -3019,7 +3028,7 @@ class Accounting extends Front_Controller{
 			//----------------------------------------------------------------------------------------
 			//KEWAJIBAN
 			//----------------------------------------------------------------------------------------
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				$print .= '	<tr><td align="left" ><b>KEWAJIBAN</b></td>';
 				$print .= '	<tr><td align="left" ><b>Kewajiban Jangka Pendek</b></td>';
 				
@@ -3142,7 +3151,7 @@ class Accounting extends Front_Controller{
 			//----------------------------------------------------------------------------------------
 			//Kewajiban Jangka Panjang
 			//----------------------------------------------------------------------------------------
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				$print .= '	<tr><td align="left" ><b>Kewajiban Jangka Panjang</b></td>';
 				
 				//Utang Bank : 2030300
@@ -3193,7 +3202,7 @@ class Accounting extends Front_Controller{
 			//----------------------------------------------------------------------------------------
 			//MODAL
 			//----------------------------------------------------------------------------------------
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				$print .= '	<tr><td align="left" ><b>MODAL</b></td>';
 				
 				//Simpanan Pokok : 3010102
@@ -3299,7 +3308,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '</tr>';
 				
-				$print .= '	<tr><td align="left" ></td>	<td colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td align="left" ></td>	<td colspan="'.$colspan.'" class="border_btm"></td></tr>';
 				$account_kewajiban_modal_konsolidasi = $account_kewajiban_lancar_konsolidasi + $account_kewajiban_jangka_panjang_konsolidasi + $account_modal_konsolidasi;
 				$print .= '	<tr><td align="left" >TOTAL KEWAJIBAN & MODAL</td>';
 				$print .= '	<td align="right" class="border_btm">'.($account_kewajiban_modal_konsolidasi < 0 ? "(".number_format(abs($account_kewajiban_modal_konsolidasi)).")" : number_format($account_kewajiban_modal_konsolidasi)).'</td>';
@@ -3572,8 +3581,8 @@ class Accounting extends Front_Controller{
 			// ARUS KAS OPERASI
 			//----------------------------------------------------------------------------------------
 			
-			$print .= '	<tr><td align="left" ><b>LAPORAN ARUS KAS</b></td>	<td colspan="8" ></td></tr>';
-			$print .= '	<tr><td align="left" ><b>ARUS KAS OPERASI</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>LAPORAN ARUS KAS</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>ARUS KAS OPERASI</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 								
 				//4010000 Bagi Hasil
@@ -3774,7 +3783,7 @@ class Accounting extends Front_Controller{
 				$saldo_awal =0;
 				
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 			
 								
 				//4010000 Pendapatan Pembiayaan
@@ -3827,16 +3836,16 @@ class Accounting extends Front_Controller{
 				//---------------------------------------------------------------------------------------------
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Beban Pembiayaan</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Beban Pembiayaan</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 
 				//---------------------------------------------------------------------------------------------
 				//BEBAN OPERASI
 				//---------------------------------------------------------------------------------------------
 				
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Biaya Operasi</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Beban Lainnya: 5030101, 5030102, 5030103, 5030104, 5030105, 5030106, 5030108, 5030109, 5030110, 5030111, 5030112, 5030113, 5030114 
 				
@@ -4472,7 +4481,7 @@ class Accounting extends Front_Controller{
 				}
 				$print .= '	</tr>';	
 				
-				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" class="border_btm" colspan="'.$colspan.'"> &nbsp;</td></tr>';
 				
 				//Laba (Rugi) Operasi
 				$account_LR_operasi_konsolidasi = $account_labarugi_kotor_konsolidasi - $account_beban_operasi_konsolidasi;
@@ -4488,8 +4497,8 @@ class Accounting extends Front_Controller{
 				//Pendapatan Diluar Usaha
 				//---------------------------------------------------------------------------------------------
 				
-				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';				
-				$print .= '	<tr><td align="left" ><b>Pendapatan (beban) lainnya</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="'.$colspan2.'"> &nbsp;</td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Pendapatan (beban) lainnya</b></td>	<td colspan="'.$colspan.'" ></td></tr>';
 				
 				//Pendapatan Lainnya : 4030001, 4030002, 4030003, 4030004, 4030005, 4030006 
 				
@@ -4653,7 +4662,7 @@ class Accounting extends Front_Controller{
 				
 				
 				
-				$print .= '	<tr><td></td><td align="left" colspan="8" class="border_btm"> &nbsp;</td></tr>';
+				$print .= '	<tr><td></td><td align="left" colspan="'.$colspan.'" class="border_btm"> &nbsp;</td></tr>';
 				
 				
 				//---------------------------------------------------------------------------------------------

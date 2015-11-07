@@ -38,13 +38,13 @@
 					  <tr>
 						<th width="350px"></th>
 						<th class="text-center">Konsolidasi</th>
-						<th class="text-center">Pusat</th>
-						<th class="text-center">Ciseeng</th>
-						<th class="text-center">Jasinga</th>
-						<th class="text-center">Bojong Gede</th>
-						<th class="text-center">Kemang</th>
-						<th class="text-center">Tenjo</th>
-						<th class="text-center">Cangkuang</th>
+						<th class="text-center">Pusat</th>						
+						<?php 
+						$branch = $this->branch_model->get_all_sort_by_id()->result();
+						foreach($branch as $b){
+							echo "<th class='text-center'>".$b->branch_name."</th>"; 
+						}
+						?>
 					  </tr>                  
 					</thead> 
 					<tbody>	

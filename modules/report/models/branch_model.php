@@ -29,6 +29,13 @@ class branch_model extends MY_Model {
     }
 	
 	
+	public function get_all_sort_by_id(){
+		$this->db->where('deleted', '0')
+				 ->order_by('branch_id', 'ASC');
+        return $this->db->get($this->table);    
+    }
+	
+	
 	public function get_branch($branch){
 		$this->db->where('deleted', '0')
 				 ->where('branch_id', $branch);

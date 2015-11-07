@@ -38,13 +38,13 @@
 					  <tr>
 						<th></th>
 						<th class="text-center">Konsolidasi</th>
-						<th class="text-center">HO</th>
-						<th class="text-center">CS</th>
-						<th class="text-center">JS</th>
-						<th class="text-center">BG</th>
-						<th class="text-center">KM</th>
-						<th class="text-center">TN</th>
-						<th class="text-center">CK</th>
+						<th class="text-center">Pusat</th>
+						<?php 
+						$branch = $this->branch_model->get_all_sort_by_id()->result();
+						foreach($branch as $b){
+							echo "<th class='text-center'>".$b->branch_name."</th>"; 
+						}
+						?>
 					  </tr>                  
 					</thead> 
 					<tbody>	
