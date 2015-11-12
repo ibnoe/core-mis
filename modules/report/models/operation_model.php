@@ -121,9 +121,13 @@ class operation_model extends MY_Model {
 	{
 		
 		if($branch=='0')
+		{
 			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6 AND tbl_clients.client_officer = '.$officer_id;
+		}
 		else
-			$wherebranch = 'tbl_clients.client_branch = '.$branch.' AND tbl_clients.client_officer = '.$officer_id;
+		{
+			$wherebranch = 'tbl_clients.client_branch = '.$branch.' AND tbl_clients.client_officer = '.$officer_id; //'tbl_group.group_tpl = ' .$officer_id;
+		}
 		if($pivotday=='')
 		{
 			$day = date('Y-m-d', strtotime('now'));
@@ -137,6 +141,7 @@ class operation_model extends MY_Model {
 
 		return $this->db->select("count(client_no) as num_client")
 						->from('tbl_clients')
+						//->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group')
 						->where($wherebranch)
 						->where($wheredate)
 						->where('tbl_clients.deleted','0')
