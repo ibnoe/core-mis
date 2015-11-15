@@ -148,14 +148,22 @@ $user_level = $this->session->userdata('user_level');
 												<li><a href="<?php echo site_url(); ?>/pembiayaan/par"> <i class="fa fa-angle-right"></i>  <span>P A R</span></a></li>
 											</ul>
 										</li>
+										<?php } ?>
+										<?php if($user_level==1 OR $user_level==4){ ?>
 										<li class="<?php echo $menu_group; ?>">
 											<a href="#layout"> <i class="fa fa-group icon"> <b class="bg-warning dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Majelis</span></a>
 											<ul class="nav lt">
+												<?php if($user_level==1){ ?>
 												<li><a href="<?php echo site_url(); ?>/branch/group"> <i class="fa fa-angle-right"></i>  <span>Data Majelis</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/group/register"> <i class="fa fa-angle-right"></i>  <span>Registrasi Majelis</span></a></li>
+												<?php } ?>
+												<?php if($user_level==1 OR $user_level==4){ ?>
 												<li><a href="<?php echo site_url(); ?>/branch/group_performance"> <i class="fa fa-angle-right"></i>  <span>Kehadiran Majelis</span></a></li>
+												<?php } ?>
 											</ul>
 										</li>
+										<?php } ?>
+										<?php if($user_level==1){ ?>
 										<li class="<?php echo $menu_investor; ?>">
 											<a href="#layout"> <i class="fa fa-usd icon"> <b class="bg-warning dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Investor</span></a>
 											<ul class="nav lt">

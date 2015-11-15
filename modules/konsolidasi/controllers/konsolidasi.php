@@ -153,14 +153,14 @@ class Konsolidasi extends Front_Controller{
 				$saldo_awal =0;
 				
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>ASET</b></td>	<td colspan="8" ></td></tr>';
-			$print .= '	<tr><td align="left" ><b>ASET LANCAR</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>ASET</b></td>	<td colspan="9" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>ASET LANCAR</b></td>	<td colspan="9" ></td></tr>';
 			
 				//Kas
 				//1010000
 				$code = "1010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000[$branch] = $account_1010000_debet[$branch] - $account_1010000_credit[$branch] ;
@@ -171,7 +171,7 @@ class Konsolidasi extends Front_Controller{
 				//1020000 
 				$code = "1020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000[$branch] = $account_1020000_debet[$branch] - $account_1020000_credit[$branch];
@@ -191,11 +191,12 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_kas[2] < 0 ? "(".number_format(abs($account_kas[2])).")" : number_format($account_kas[2])).'</td>
 								<td align="right" >'.($account_kas[5] < 0 ? "(".number_format(abs($account_kas[5])).")" : number_format($account_kas[5])).'</td>
 								<td align="right" >'.($account_kas[6] < 0 ? "(".number_format(abs($account_kas[6])).")" : number_format($account_kas[6])).'</td>
+								<td align="right" >'.($account_kas[7] < 0 ? "(".number_format(abs($account_kas[7])).")" : number_format($account_kas[7])).'</td>
 							</tr>';	
 							
 				//Piutang MBA 1030102
 				$code = "1030102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102[$branch] = $account_1030102_debet[$branch] - $account_1030102_credit[$branch];
@@ -205,7 +206,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang IJA 1030103
 				$code = "1030103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103[$branch] = $account_1030103_debet[$branch] - $account_1030103_credit[$branch];
@@ -215,7 +216,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang QH 1030104
 				$code = "1030104";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030104_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030104_debet[$branch] - $account_1030104_credit[$branch];
@@ -230,7 +231,7 @@ class Konsolidasi extends Front_Controller{
 				
 				//Piutang QH 1030504
 				$code = "1030504";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030504_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030504_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030504_debet[$branch] - $account_1030504_credit[$branch];
@@ -241,7 +242,7 @@ class Konsolidasi extends Front_Controller{
 				
 				$code = "1030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200[$branch] = $account_1030200_debet[$branch] - $account_1030200_credit[$branch];
@@ -256,7 +257,7 @@ class Konsolidasi extends Front_Controller{
 				//Piutang Cabang 1030400
 				$code = "1030400";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030400_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400[$branch] = $account_1030400_debet[$branch] - $account_1030400_credit[$branch];
@@ -279,6 +280,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_piutang_pembiayaan[2] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[2])).")" : number_format($account_piutang_pembiayaan[2])).'</td>
 								<td align="right" >'.($account_piutang_pembiayaan[5] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[5])).")" : number_format($account_piutang_pembiayaan[5])).'</td>
 								<td align="right" >'.($account_piutang_pembiayaan[6] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[6])).")" : number_format($account_piutang_pembiayaan[6])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[7] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[7])).")" : number_format($account_piutang_pembiayaan[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Murabahah</td>
 								<td align="right" >'.($account_1030102_konsolidasi < 0 ? "(".number_format(abs($account_1030102_konsolidasi)).")" : number_format($account_1030102_konsolidasi)).'</td>
@@ -289,6 +291,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_1030102[2] < 0 ? "(".number_format(abs($account_1030102[2])).")" : number_format($account_1030102[2])).'</td>
 								<td align="right" >'.($account_1030102[5] < 0 ? "(".number_format(abs($account_1030102[5])).")" : number_format($account_1030102[5])).'</td>
 								<td align="right" >'.($account_1030102[6] < 0 ? "(".number_format(abs($account_1030102[6])).")" : number_format($account_1030102[6])).'</td>
+								<td align="right" >'.($account_1030102[7] < 0 ? "(".number_format(abs($account_1030102[7])).")" : number_format($account_1030102[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ijarah</td>
 								<td align="right" >'.($account_1030103_konsolidasi < 0 ? "(".number_format(abs($account_1030103_konsolidasi)).")" : number_format($account_1030103_konsolidasi)).'</td>
@@ -299,6 +302,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_1030103[2] < 0 ? "(".number_format(abs($account_1030103[2])).")" : number_format($account_1030103[2])).'</td>
 								<td align="right" >'.($account_1030103[5] < 0 ? "(".number_format(abs($account_1030103[5])).")" : number_format($account_1030103[5])).'</td>
 								<td align="right" >'.($account_1030103[6] < 0 ? "(".number_format(abs($account_1030103[6])).")" : number_format($account_1030103[6])).'</td>
+								<td align="right" >'.($account_1030103[7] < 0 ? "(".number_format(abs($account_1030103[7])).")" : number_format($account_1030103[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qadrul Hasan</td>
 								<td align="right" >'.($account_1030104_konsolidasi < 0 ? "(".number_format(abs($account_1030104_konsolidasi)).")" : number_format($account_1030104_konsolidasi)).'</td>
@@ -309,6 +313,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_1030104[2] < 0 ? "(".number_format(abs($account_1030104[2])).")" : number_format($account_1030104[2])).'</td>
 								<td align="right" >'.($account_1030104[5] < 0 ? "(".number_format(abs($account_1030104[5])).")" : number_format($account_1030104[5])).'</td>
 								<td align="right" >'.($account_1030104[6] < 0 ? "(".number_format(abs($account_1030104[6])).")" : number_format($account_1030104[6])).'</td>
+								<td align="right" >'.($account_1030104[7] < 0 ? "(".number_format(abs($account_1030104[7])).")" : number_format($account_1030104[7])).'</td>
 							</tr>';				
 				/*$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cabang</td>
 								<td align="right" >'.($account_1030400_konsolidasi < 0 ? "(".number_format(abs($account_1030400_konsolidasi)).")" : number_format($account_1030400_konsolidasi)).'</td>
@@ -324,7 +329,7 @@ class Konsolidasi extends Front_Controller{
 				//Beban dibayar dimuka 1050000
 				$code = "1050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000[$branch] = $account_1050000_debet[$branch] - $account_1050000_credit[$branch];
@@ -334,7 +339,7 @@ class Konsolidasi extends Front_Controller{
 				//Persediaan Barang Cetakan 1060000
 				$code = "1060000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1060000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000[$branch] = $account_1060000_debet[$branch] - $account_1060000_credit[$branch];
@@ -351,6 +356,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_1050000[2] < 0 ? "(".number_format(abs($account_1050000[2])).")" : number_format($account_1050000[2])).'</td>
 								<td align="right" >'.($account_1050000[5] < 0 ? "(".number_format(abs($account_1050000[5])).")" : number_format($account_1050000[5])).'</td>
 								<td align="right" >'.($account_1050000[6] < 0 ? "(".number_format(abs($account_1050000[6])).")" : number_format($account_1050000[6])).'</td>
+								<td align="right" >'.($account_1050000[7] < 0 ? "(".number_format(abs($account_1050000[7])).")" : number_format($account_1050000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Persediaan Barang Cetakan</td>
 								<td align="right" class="border_btm">'.($account_1060000_konsolidasi < 0 ? "(".number_format(abs($account_1060000_konsolidasi)).")" : number_format($account_1060000_konsolidasi)).'</td>
@@ -361,6 +367,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_1060000[2] < 0 ? "(".number_format(abs($account_1060000[2])).")" : number_format($account_1060000[2])).'</td>
 								<td align="right" class="border_btm">'.($account_1060000[5] < 0 ? "(".number_format(abs($account_1060000[5])).")" : number_format($account_1060000[5])).'</td>
 								<td align="right" class="border_btm">'.($account_1060000[6] < 0 ? "(".number_format(abs($account_1060000[6])).")" : number_format($account_1060000[6])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[7] < 0 ? "(".number_format(abs($account_1060000[7])).")" : number_format($account_1060000[7])).'</td>
 							</tr>';
 				
 				$print .= '	<tr><td align="left" >Jumlah Aset Lancar</td>
@@ -372,15 +379,16 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_aset_lancar[2] < 0 ? "(".number_format(abs($account_aset_lancar[2])).")" : number_format($account_aset_lancar[2])).'</td>
 								<td align="right" class="border_btm">'.($account_aset_lancar[5] < 0 ? "(".number_format(abs($account_aset_lancar[5])).")" : number_format($account_aset_lancar[5])).'</td>
 								<td align="right" class="border_btm">'.($account_aset_lancar[6] < 0 ? "(".number_format(abs($account_aset_lancar[6])).")" : number_format($account_aset_lancar[6])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[7] < 0 ? "(".number_format(abs($account_aset_lancar[7])).")" : number_format($account_aset_lancar[7])).'</td>
 							</tr>';
 							
 				//ASET TIDAK LANCAR
-				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';
-				$print .= '	<tr><td align="left" ><b>ASET TIDAK LANCAR</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" colspan="9" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>ASET TIDAK LANCAR</b></td>	<td colspan="9" ></td></tr>';
 				
 				//Aset Tetap setelah dikurangi = 1080301 + 1080302				
 				$code = "1080301";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080301_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301[$branch] = $account_1080301_debet[$branch] - $account_1080301_credit[$branch];
@@ -389,7 +397,7 @@ class Konsolidasi extends Front_Controller{
 					$account_aset_tidak_lancar[$branch] += $account_1080301[$branch];
 				}
 				$code = "1080302";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080302_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302[$branch] = $account_1080302_debet[$branch] - $account_1080302_credit[$branch];
@@ -402,7 +410,7 @@ class Konsolidasi extends Front_Controller{
 				//Aset Lain	1090000
 				$code = "1090000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1090000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000[$branch] = $account_1090000_debet[$branch] - $account_1090000_credit[$branch];
@@ -421,6 +429,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_aset_tetap[2] < 0 ? "(".number_format(abs($account_aset_tetap[2])).")" : number_format($account_aset_tetap[2])).'</td>
 								<td align="right" >'.($account_aset_tetap[5] < 0 ? "(".number_format(abs($account_aset_tetap[5])).")" : number_format($account_aset_tetap[5])).'</td>
 								<td align="right" >'.($account_aset_tetap[6] < 0 ? "(".number_format(abs($account_aset_tetap[6])).")" : number_format($account_aset_tetap[6])).'</td>
+								<td align="right" >'.($account_aset_tetap[7] < 0 ? "(".number_format(abs($account_aset_tetap[7])).")" : number_format($account_aset_tetap[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Aset Lain</td>
 								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
@@ -431,6 +440,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
 								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
 								<td align="right" class="border_btm">'.($account_1090000[6] < 0 ? "(".number_format(abs($account_1090000[6])).")" : number_format($account_1090000[6])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[7] < 0 ? "(".number_format(abs($account_1090000[7])).")" : number_format($account_1090000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >Jumlah Aset Tidak Lancar</td>
 								<td align="right" class="border_btm">'.($account_aset_tidak_lancar_konsolidasi < 0 ? "(".number_format(abs($account_aset_tidak_lancar_konsolidasi)).")" : number_format($account_aset_tidak_lancar_konsolidasi)).'</td>
@@ -441,18 +451,19 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[2] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[2])).")" : number_format($account_aset_tidak_lancar[2])).'</td>
 								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[5] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[5])).")" : number_format($account_aset_tidak_lancar[5])).'</td>
 								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[6] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[6])).")" : number_format($account_aset_tidak_lancar[6])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[7] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[7])).")" : number_format($account_aset_tidak_lancar[7])).'</td>
 							</tr>';
 				
 				
 				//JUMLAH ASET
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_aset[$branch] += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 					$account_aset_konsolidasi += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 				}
 				$account_aset_konsolidasi = $account_aset_lancar_konsolidasi + $account_aset_tidak_lancar_konsolidasi;
 				
 				$account_aset_tidak_lancar_konsolidasi = $account_aset_tetap_konsolidasi + $account_aset_lain_konsolidasi;
-				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="9" class="border_btm"></td></tr>';
 				$print .= '	<tr><td align="left" ><b>JUMLAH ASET</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_aset_konsolidasi < 0 ? "(".number_format(abs($account_aset_konsolidasi)).")" : number_format($account_aset_konsolidasi)).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_aset[0] < 0 ? "(".number_format(abs($account_aset[0])).")" : number_format($account_aset[0])).'</b></td>
@@ -462,17 +473,18 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm_double"><b>'.($account_aset[2] < 0 ? "(".number_format(abs($account_aset[2])).")" : number_format($account_aset[2])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_aset[5] < 0 ? "(".number_format(abs($account_aset[5])).")" : number_format($account_aset[5])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_aset[6] < 0 ? "(".number_format(abs($account_aset[6])).")" : number_format($account_aset[6])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[7] < 0 ? "(".number_format(abs($account_aset[7])).")" : number_format($account_aset[7])).'</b></td>
 							</tr>';
 							
 				//LIABILITAS
-				$print .= '	<tr><td colspan="8" ></td>&nbsp;</tr>';
-				$print .= '	<tr><td align="left" ><b>LIABILITAS DAN EKUITAS</b></td>	<td colspan="8" ></td></tr>';
-				$print .= '	<tr><td align="left" ><b>LIABILITAS JANGKA PENDEK</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td colspan="9" ></td>&nbsp;</tr>';
+				$print .= '	<tr><td align="left" ><b>LIABILITAS DAN EKUITAS</b></td>	<td colspan="9" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>LIABILITAS JANGKA PENDEK</b></td>	<td colspan="9" ></td></tr>';
 				
 				//Simpanan Anggota 2010000
 				$code = "2010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000[$branch] = $account_2010000_credit[$branch] - $account_2010000_debet[$branch];
@@ -483,7 +495,7 @@ class Konsolidasi extends Front_Controller{
 				//Simpanan Berjangka 2020000
 				$code = "2020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000[$branch] = $account_2020000_credit[$branch] - $account_2020000_debet[$branch];
@@ -494,7 +506,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Pembiayaan 2030000
 				$code = "2030000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2030000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000[$branch] = $account_2030000_credit[$branch] - $account_2030000_debet[$branch];
@@ -506,7 +518,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Pembiayaan Kantor Pusat 2030200
 				/*$code = "2030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_2030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_2030200[$branch] = $account_2030200_credit[$branch] - $account_2030200_debet[$branch];
@@ -518,7 +530,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Leasing 2040000
 				$code = "2040000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2040000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000[$branch] = $account_2040000_credit[$branch] - $account_2040000_debet[$branch];
@@ -529,7 +541,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Lain-lain 2050000
 				$code = "2050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000[$branch] = $account_2050000_credit[$branch] - $account_2050000_debet[$branch];
@@ -537,7 +549,7 @@ class Konsolidasi extends Front_Controller{
 					$account_liabilitas[$branch] += $account_2050000[$branch];
 				}
 				
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_liabilitas_konsolidasi += $account_liabilitas[$branch];
 				}
 				
@@ -551,6 +563,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_2010000[2] < 0 ? "(".number_format(abs($account_2010000[2])).")" : number_format($account_2010000[2])).'</td>
 								<td align="right" >'.($account_2010000[5] < 0 ? "(".number_format(abs($account_2010000[5])).")" : number_format($account_2010000[5])).'</td>
 								<td align="right" >'.($account_2010000[6] < 0 ? "(".number_format(abs($account_2010000[6])).")" : number_format($account_2010000[6])).'</td>
+								<td align="right" >'.($account_2010000[7] < 0 ? "(".number_format(abs($account_2010000[7])).")" : number_format($account_2010000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan Berjangka</td>
 								<td align="right" >'.($account_2020000_konsolidasi < 0 ? "(".number_format(abs($account_2020000_konsolidasi)).")" : number_format($account_2020000_konsolidasi)).'</td>
@@ -561,6 +574,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_2020000[2] < 0 ? "(".number_format(abs($account_2020000[2])).")" : number_format($account_2020000[2])).'</td>
 								<td align="right" >'.($account_2020000[5] < 0 ? "(".number_format(abs($account_2020000[5])).")" : number_format($account_2020000[5])).'</td>
 								<td align="right" >'.($account_2020000[6] < 0 ? "(".number_format(abs($account_2020000[6])).")" : number_format($account_2020000[6])).'</td>
+								<td align="right" >'.($account_2020000[7] < 0 ? "(".number_format(abs($account_2020000[7])).")" : number_format($account_2020000[7])).'</td>
 							</tr>';
 				
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Pembiayaan</td>
@@ -572,6 +586,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_2030000[2] < 0 ? "(".number_format(abs($account_2030000[2])).")" : number_format($account_2030000[2])).'</td>
 								<td align="right" >'.($account_2030000[5] < 0 ? "(".number_format(abs($account_2030000[5])).")" : number_format($account_2030000[5])).'</td>
 								<td align="right" >'.($account_2030000[6] < 0 ? "(".number_format(abs($account_2030000[6])).")" : number_format($account_2030000[6])).'</td>
+									<td align="right" >'.($account_2030000[7] < 0 ? "(".number_format(abs($account_2030000[7])).")" : number_format($account_2030000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Pembiayaan K. Pusat</td>
 								<td align="right" >'.($account_2030200_konsolidasi < 0 ? "(".number_format(abs($account_2030200_konsolidasi)).")" : number_format($account_2030200_konsolidasi)).'</td>
@@ -582,6 +597,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_2030200[2] < 0 ? "(".number_format(abs($account_2030200[2])).")" : number_format($account_2030200[2])).'</td>
 								<td align="right" >'.($account_2030200[5] < 0 ? "(".number_format(abs($account_2030200[5])).")" : number_format($account_2030200[5])).'</td>
 								<td align="right" >'.($account_2030200[6] < 0 ? "(".number_format(abs($account_2030200[6])).")" : number_format($account_2030200[6])).'</td>
+								<td align="right" >'.($account_2030200[7] < 0 ? "(".number_format(abs($account_2030200[7])).")" : number_format($account_2030200[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Leasing</td>
 								<td align="right" >'.($account_2040000_konsolidasi < 0 ? "(".number_format(abs($account_2040000_konsolidasi)).")" : number_format($account_2040000_konsolidasi)).'</td>
@@ -592,6 +608,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_2040000[2] < 0 ? "(".number_format(abs($account_2040000[2])).")" : number_format($account_2040000[2])).'</td>
 								<td align="right" >'.($account_2040000[5] < 0 ? "(".number_format(abs($account_2040000[5])).")" : number_format($account_2040000[5])).'</td>
 								<td align="right" >'.($account_2040000[6] < 0 ? "(".number_format(abs($account_2040000[6])).")" : number_format($account_2040000[6])).'</td>
+								<td align="right" >'.($account_2040000[7] < 0 ? "(".number_format(abs($account_2040000[7])).")" : number_format($account_2040000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Lain-lain</td>
 								<td align="right" class="border_btm">'.($account_2050000_konsolidasi < 0 ? "(".number_format(abs($account_2050000_konsolidasi)).")" : number_format($account_2050000_konsolidasi)).'</td>
@@ -602,6 +619,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_2050000[2] < 0 ? "(".number_format(abs($account_2050000[2])).")" : number_format($account_2050000[2])).'</td>
 								<td align="right" class="border_btm">'.($account_2050000[5] < 0 ? "(".number_format(abs($account_2050000[5])).")" : number_format($account_2050000[5])).'</td>
 								<td align="right" class="border_btm">'.($account_2050000[6] < 0 ? "(".number_format(abs($account_2050000[6])).")" : number_format($account_2050000[6])).'</td>
+								<td align="right" class="border_btm">'.($account_2050000[7] < 0 ? "(".number_format(abs($account_2050000[7])).")" : number_format($account_2050000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >Jumlah Liabilitas Jangka Pendek</td>
 								<td align="right" class="border_btm">'.($account_liabilitas_konsolidasi < 0 ? "(".number_format(abs($account_liabilitas_konsolidasi)).")" : number_format($account_liabilitas_konsolidasi)).'</td>
@@ -612,16 +630,17 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_liabilitas[2] < 0 ? "(".number_format(abs($account_liabilitas[2])).")" : number_format($account_liabilitas[2])).'</td>
 								<td align="right" class="border_btm">'.($account_liabilitas[5] < 0 ? "(".number_format(abs($account_liabilitas[5])).")" : number_format($account_liabilitas[5])).'</td>
 								<td align="right" class="border_btm">'.($account_liabilitas[6] < 0 ? "(".number_format(abs($account_liabilitas[6])).")" : number_format($account_liabilitas[6])).'</td>
+								<td align="right" class="border_btm">'.($account_liabilitas[7] < 0 ? "(".number_format(abs($account_liabilitas[7])).")" : number_format($account_liabilitas[7])).'</td>
 							</tr>';
 							
 										
 				//EKUITAS
-				$print .= '	<tr><td colspan="8" ></td>&nbsp;</tr>';
-				$print .= '	<tr><td align="left" ><b>EKUITAS</b></td>	<td colspan="8" ></td></tr>';
+				$print .= '	<tr><td colspan="9" ></td>&nbsp;</tr>';
+				$print .= '	<tr><td align="left" ><b>EKUITAS</b></td>	<td colspan="9" ></td></tr>';
 				
 				//Simpanan Pokok 3010102
 				$code = "3010102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102[$branch] = $account_3010102_credit[$branch] - $account_3010102_debet[$branch];
@@ -631,7 +650,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//Simpanan Wajib 3010101
 				$code = "3010101";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010101_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101[$branch] = $account_3010101_credit[$branch] - $account_3010101_debet[$branch];
@@ -641,7 +660,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Hibah 3010103
 				$code = "3010103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103[$branch] = $account_3010103_credit[$branch] - $account_3010103_debet[$branch];
@@ -651,7 +670,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Modal Penyertaan 3010201
 				$code = "3010201";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010201_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201[$branch] = $account_3010201_credit[$branch] - $account_3010201_debet[$branch];
@@ -661,7 +680,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//SHU Tahun Lalu
 				$code = "3020001";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020001_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001[$branch] = $account_3020001_credit[$branch] - $account_3020001_debet[$branch];
@@ -669,7 +688,7 @@ class Konsolidasi extends Front_Controller{
 					$account_ekuitas[$branch] += $account_3020001[$branch];
 					$account_ekuitas_konsolidasi += $account_3020001[$branch];
 				}
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020002[$branch] = $this->hitung_laba_rugi($date_start,$date_end,$branch);
 					$account_3020002_konsolidasi += $account_3020002[$branch];
 					$account_ekuitas[$branch] += $account_3020002[$branch];
@@ -685,7 +704,8 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_3010102[3] < 0 ? "(".number_format(abs($account_3010102[3])).")" : number_format($account_3010102[3])).'</td>
 								<td align="right" >'.($account_3010102[2] < 0 ? "(".number_format(abs($account_3010102[2])).")" : number_format($account_3010102[2])).'</td>
 								<td align="right" >'.($account_3010102[5] < 0 ? "(".number_format(abs($account_3010102[5])).")" : number_format($account_3010102[5])).'</td>
-								<td align="right" >'.($account_3010102[6] < 0 ? "(".number_format(abs($account_3010102[6])).")" : number_format($account_3010102[5])).'</td>
+								<td align="right" >'.($account_3010102[6] < 0 ? "(".number_format(abs($account_3010102[6])).")" : number_format($account_3010102[6])).'</td>
+								<td align="right" >'.($account_3010102[7] < 0 ? "(".number_format(abs($account_3010102[7])).")" : number_format($account_3010102[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan Wajib</td>
 								<td align="right" >'.($account_3010101_konsolidasi < 0 ? "(".number_format(abs($account_3010101_konsolidasi)).")" : number_format($account_3010101_konsolidasi)).'</td>
@@ -696,6 +716,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_3010101[2] < 0 ? "(".number_format(abs($account_3010101[2])).")" : number_format($account_3010101[2])).'</td>
 								<td align="right" >'.($account_3010101[5] < 0 ? "(".number_format(abs($account_3010101[5])).")" : number_format($account_3010101[5])).'</td>
 								<td align="right" >'.($account_3010101[6] < 0 ? "(".number_format(abs($account_3010101[6])).")" : number_format($account_3010101[6])).'</td>
+								<td align="right" >'.($account_3010101[7] < 0 ? "(".number_format(abs($account_3010101[7])).")" : number_format($account_3010101[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hibah</td>
 								<td align="right" >'.($account_3010103_konsolidasi < 0 ? "(".number_format(abs($account_3010103_konsolidasi)).")" : number_format($account_3010103_konsolidasi)).'</td>
@@ -706,6 +727,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_3010103[2] < 0 ? "(".number_format(abs($account_3010103[2])).")" : number_format($account_3010103[2])).'</td>
 								<td align="right" >'.($account_3010103[5] < 0 ? "(".number_format(abs($account_3010103[5])).")" : number_format($account_3010103[5])).'</td>
 								<td align="right" >'.($account_3010103[6] < 0 ? "(".number_format(abs($account_3010103[6])).")" : number_format($account_3010103[6])).'</td>
+								<td align="right" >'.($account_3010103[7] < 0 ? "(".number_format(abs($account_3010103[7])).")" : number_format($account_3010103[7])).'</td>
 							</tr>';				
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Modal Penyertaan</td>
 								<td align="right" >'.($account_3010201_konsolidasi < 0 ? "(".number_format(abs($account_3010201_konsolidasi)).")" : number_format($account_3010201_konsolidasi)).'</td>
@@ -716,6 +738,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_3010201[2] < 0 ? "(".number_format(abs($account_3010201[2])).")" : number_format($account_3010201[2])).'</td>
 								<td align="right" >'.($account_3010201[5] < 0 ? "(".number_format(abs($account_3010201[5])).")" : number_format($account_3010201[5])).'</td>
 								<td align="right" >'.($account_3010201[6] < 0 ? "(".number_format(abs($account_3010201[6])).")" : number_format($account_3010201[6])).'</td>
+								<td align="right" >'.($account_3010201[7] < 0 ? "(".number_format(abs($account_3010201[7])).")" : number_format($account_3010201[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;SHU Tahun Lalu</td>
 								<td align="right" >'.($account_3020001_konsolidasi < 0 ? "(".number_format(abs($account_3020001_konsolidasi)).")" : number_format($account_3020001_konsolidasi)).'</td>
@@ -726,6 +749,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_3020001[2] < 0 ? "(".number_format(abs($account_3020001[2])).")" : number_format($account_3020001[2])).'</td>
 								<td align="right" >'.($account_3020001[5] < 0 ? "(".number_format(abs($account_3020001[5])).")" : number_format($account_3020001[5])).'</td>
 								<td align="right" >'.($account_3020001[6] < 0 ? "(".number_format(abs($account_3020001[6])).")" : number_format($account_3020001[6])).'</td>
+								<td align="right" >'.($account_3020001[7] < 0 ? "(".number_format(abs($account_3020001[7])).")" : number_format($account_3020001[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;SHU Tahun Berjalan</td>
 								<td align="right" class="border_btm">'.($account_3020002_konsolidasi < 0 ? "(".number_format(abs($account_3020002_konsolidasi)).")" : number_format($account_3020002_konsolidasi)).'</td>
@@ -736,6 +760,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_3020002[2] < 0 ? "(".number_format(abs($account_3020002[2])).")" : number_format($account_3020002[2])).'</td>
 								<td align="right" class="border_btm">'.($account_3020002[5] < 0 ? "(".number_format(abs($account_3020002[5])).")" : number_format($account_3020002[5])).'</td>
 								<td align="right" class="border_btm">'.($account_3020002[6] < 0 ? "(".number_format(abs($account_3020002[6])).")" : number_format($account_3020002[6])).'</td>
+								<td align="right" class="border_btm">'.($account_3020002[7] < 0 ? "(".number_format(abs($account_3020002[7])).")" : number_format($account_3020002[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >Jumlah Ekuitas</td>
 								<td align="right" class="border_btm">'.($account_ekuitas_konsolidasi < 0 ? "(".number_format(abs($account_ekuitas_konsolidasi)).")" : number_format($account_ekuitas_konsolidasi)).'</td>
@@ -746,16 +771,17 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_ekuitas[2] < 0 ? "(".number_format(abs($account_ekuitas[2])).")" : number_format($account_ekuitas[2])).'</td>
 								<td align="right" class="border_btm">'.($account_ekuitas[5] < 0 ? "(".number_format(abs($account_ekuitas[5])).")" : number_format($account_ekuitas[5])).'</td>
 								<td align="right" class="border_btm">'.($account_ekuitas[6] < 0 ? "(".number_format(abs($account_ekuitas[6])).")" : number_format($account_ekuitas[6])).'</td>
+								<td align="right" class="border_btm">'.($account_ekuitas[7] < 0 ? "(".number_format(abs($account_ekuitas[7])).")" : number_format($account_ekuitas[7])).'</td>
 							</tr>';
 				
 				//JUMLAH lIABILITAS EKUITAS
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_liabilitas_ekuitas[$branch] += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 					$account_liabilitas_ekuitas_konsolidasi += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 				}
 				
 				$account_aset_tidak_lancar_konsolidasi = $account_aset_tetap_konsolidasi + $account_aset_lain_konsolidasi;
-				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="9" class="border_btm"></td></tr>';
 				$print .= '	<tr><td align="left" ><b>JUMLAH LIABILITAS DAN EKUITAS</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas_konsolidasi < 0 ? "(".number_format(abs($account_liabilitas_ekuitas_konsolidasi)).")" : number_format($account_liabilitas_ekuitas_konsolidasi)).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas[0] < 0 ? "(".number_format(abs($account_liabilitas_ekuitas[0])).")" : number_format($account_liabilitas_ekuitas[0])).'</b></td>
@@ -765,14 +791,15 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas[2] < 0 ? "(".number_format(abs($account_liabilitas_ekuitas[2])).")" : number_format($account_liabilitas_ekuitas[2])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas[5] < 0 ? "(".number_format(abs($account_liabilitas_ekuitas[5])).")" : number_format($account_liabilitas_ekuitas[5])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas[6] < 0 ? "(".number_format(abs($account_liabilitas_ekuitas[6])).")" : number_format($account_liabilitas_ekuitas[6])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_liabilitas_ekuitas[7] < 0 ? "(".number_format(abs($account_liabilitas_ekuitas[7])).")" : number_format($account_liabilitas_ekuitas[7])).'</b></td>
 							</tr>';
 							
 							
 				$selisih = $account_aset_konsolidasi - $account_liabilitas_ekuitas_konsolidasi;	
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_selisih[$branch] += $account_aset[$branch] - $account_liabilitas_ekuitas[$branch];
 				}				
-				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="8" class="border_btm"></td></tr>';
+				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="9" class="border_btm"></td></tr>';
 				$print .= '	<tr><td align="left" ><b>SELISIH</b></td>
 								<td align="right" class="border_btm_double"><b>'.($selisih < 0 ? "(".number_format(abs($selisih)).")" : number_format($selisih)).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_selisih[0] < 0 ? "(".number_format(abs($account_selisih[0])).")" : number_format($account_selisih[0])).'</b></td>
@@ -782,6 +809,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm_double"><b>'.($account_selisih[2] < 0 ? "(".number_format(abs($account_selisih[2])).")" : number_format($account_selisih[2])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_selisih[5] < 0 ? "(".number_format(abs($account_selisih[5])).")" : number_format($account_selisih[5])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($account_selisih[6] < 0 ? "(".number_format(abs($account_selisih[6])).")" : number_format($account_selisih[6])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_selisih[7] < 0 ? "(".number_format(abs($account_selisih[7])).")" : number_format($account_selisih[7])).'</b></td>
 							</tr>';
 			$this->template	->set('menu_title', 'Laporan Neraca Konsolidasi')
 							->set('menu_konsolidasi', 'active')
@@ -848,12 +876,12 @@ class Konsolidasi extends Front_Controller{
 				$saldo_awal =0;
 				
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="9" ></td></tr>';
 			
 				
 				//4010102 Pendapatan dari Murabahah
 				$code = "4010102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_4010102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_4010102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_4010102[$branch] = $account_4010102_credit[$branch] - $account_4010102_debet[$branch];
@@ -863,7 +891,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//4010103 Pendapatan dari Ijarah
 				$code = "4010103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_4010103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_4010103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_4010103[$branch] = $account_4010103_credit[$branch] - $account_4010103_debet[$branch];
@@ -881,6 +909,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right">'.($account_pendapatan_pembiayaan[2] < 0 ? "(".number_format(abs($account_pendapatan_pembiayaan[2])).")" : number_format($account_pendapatan_pembiayaan[2])).'</td>
 								<td align="right">'.($account_pendapatan_pembiayaan[5] < 0 ? "(".number_format(abs($account_pendapatan_pembiayaan[5])).")" : number_format($account_pendapatan_pembiayaan[5])).'</td>
 								<td align="right">'.($account_pendapatan_pembiayaan[6] < 0 ? "(".number_format(abs($account_pendapatan_pembiayaan[6])).")" : number_format($account_pendapatan_pembiayaan[6])).'</td>
+								<td align="right">'.($account_pendapatan_pembiayaan[7] < 0 ? "(".number_format(abs($account_pendapatan_pembiayaan[7])).")" : number_format($account_pendapatan_pembiayaan[7])).'</td>
 							</tr>';	
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pendapatan dari Murabahah</td>
 								<td align="right">'.($account_4010102_total < 0 ? "(".number_format(abs($account_4010102_total)).")" : number_format($account_4010102_total)).'</td>
@@ -891,6 +920,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right">'.($account_4010102[2] < 0 ? "(".number_format(abs($account_4010102[2])).")" : number_format($account_4010102[2])).'</td>
 								<td align="right">'.($account_4010102[5] < 0 ? "(".number_format(abs($account_4010102[5])).")" : number_format($account_4010102[5])).'</td>
 								<td align="right">'.($account_4010102[6] < 0 ? "(".number_format(abs($account_4010102[6])).")" : number_format($account_4010102[6])).'</td>
+								<td align="right">'.($account_4010102[7] < 0 ? "(".number_format(abs($account_4010102[7])).")" : number_format($account_4010102[7])).'</td>
 							</tr>';	
 				
 				
@@ -903,12 +933,13 @@ class Konsolidasi extends Front_Controller{
 								<td align="right">'.($account_4010103[2] < 0 ? "(".number_format(abs($account_4010103[2])).")" : number_format($account_4010103[2])).'</td>
 								<td align="right">'.($account_4010103[5] < 0 ? "(".number_format(abs($account_4010103[5])).")" : number_format($account_4010103[5])).'</td>
 								<td align="right">'.($account_4010103[6] < 0 ? "(".number_format(abs($account_4010103[6])).")" : number_format($account_4010103[6])).'</td>
+								<td align="right">'.($account_4010103[7] < 0 ? "(".number_format(abs($account_4010103[7])).")" : number_format($account_4010103[7])).'</td>
 							</tr>';	
 				
 				//4020000 Pendapatan Jasa Administrasi
 				$code = "4020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_4020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_4020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_4020000[$branch] = $account_4020000_credit[$branch] - $account_4020000_debet[$branch];
@@ -925,6 +956,8 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_4020000[2] < 0 ? "(".number_format(abs($account_4020000[2])).")" : number_format($account_4020000[2])).'</td>
 								<td align="right" class="border_btm">'.($account_4020000[5] < 0 ? "(".number_format(abs($account_4020000[5])).")" : number_format($account_4020000[5])).'</td>
 								<td align="right" class="border_btm">'.($account_4020000[6] < 0 ? "(".number_format(abs($account_4020000[6])).")" : number_format($account_4020000[6])).'</td>
+								<td align="right" class="border_btm">'.($account_4020000[7] < 0 ? "(".number_format(abs($account_4020000[7])).")" : number_format($account_4020000[7])).'</td>
+								
 							</tr>';	
 							
 				//Jumlah Pendapatan			
@@ -938,6 +971,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_pendapatan_total[2] < 0 ? "(".number_format(abs($account_pendapatan_total[2])).")" : number_format($account_pendapatan_total[2])).'</td>
 								<td align="right" class="border_btm">'.($account_pendapatan_total[5] < 0 ? "(".number_format(abs($account_pendapatan_total[5])).")" : number_format($account_pendapatan_total[5])).'</td>
 								<td align="right" class="border_btm">'.($account_pendapatan_total[6] < 0 ? "(".number_format(abs($account_pendapatan_total[6])).")" : number_format($account_pendapatan_total[6])).'</td>
+								<td align="right" class="border_btm">'.($account_pendapatan_total[7] < 0 ? "(".number_format(abs($account_pendapatan_total[7])).")" : number_format($account_pendapatan_total[7])).'</td>
 							</tr>';	
 								
 				
@@ -947,7 +981,7 @@ class Konsolidasi extends Front_Controller{
 				//5010000 
 				$code = "5010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5010000[$branch] = $account_5010000_debet[$branch] - $account_5010000_credit[$branch];
@@ -957,7 +991,7 @@ class Konsolidasi extends Front_Controller{
 				//5020000 
 				$code = "5020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5020000[$branch] = $account_5020000_debet[$branch] - $account_5020000_credit[$branch];
@@ -965,7 +999,7 @@ class Konsolidasi extends Front_Controller{
 					$account_beban_pembiayaan_total[$branch] += $account_5020000[$branch];
 					
 				}
-				$print .= '	<tr><td align="left" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';
 				$print .= '	<tr><td align="left" ><b>Beban Pembiayaan</b></td>
 								<td align="right" >'.($account_beban_pembiayaan_konsolidasi < 0 ? "(".number_format(abs($account_beban_pembiayaan_konsolidasi)).")" : number_format($account_beban_pembiayaan_konsolidasi)).'</td>
 								<td align="right" >'.($account_beban_pembiayaan_total[0] < 0 ? "(".number_format(abs($account_beban_pembiayaan_total[0])).")" : number_format($account_beban_pembiayaan_total[0])).'</td>
@@ -975,6 +1009,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_beban_pembiayaan_total[2] < 0 ? "(".number_format(abs($account_beban_pembiayaan_total[2])).")" : number_format($account_beban_pembiayaan_total[2])).'</td>
 								<td align="right" >'.($account_beban_pembiayaan_total[5] < 0 ? "(".number_format(abs($account_beban_pembiayaan_total[5])).")" : number_format($account_beban_pembiayaan_total[5])).'</td>
 								<td align="right" >'.($account_beban_pembiayaan_total[6] < 0 ? "(".number_format(abs($account_beban_pembiayaan_total[6])).")" : number_format($account_beban_pembiayaan_total[6])).'</td>
+								<td align="right" >'.($account_beban_pembiayaan_total[7] < 0 ? "(".number_format(abs($account_beban_pembiayaan_total[7])).")" : number_format($account_beban_pembiayaan_total[7])).'</td>
 							</tr>';	
 
 							
@@ -982,7 +1017,7 @@ class Konsolidasi extends Front_Controller{
 				//5040000 
 				$code = "5030000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5030000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5030000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5030000[$branch] = $account_5030000_debet[$branch] - $account_5030000_credit[$branch];
@@ -992,7 +1027,7 @@ class Konsolidasi extends Front_Controller{
 				//5040000 
 				$code = "5040000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5040000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5040000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5040000[$branch] = $account_5040000_debet[$branch] - $account_5040000_credit[$branch];
@@ -1002,7 +1037,7 @@ class Konsolidasi extends Front_Controller{
 				//5050000 
 				$code = "5050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5050000[$branch] = $account_5050000_debet[$branch] - $account_5050000_credit[$branch];
@@ -1012,7 +1047,7 @@ class Konsolidasi extends Front_Controller{
 				//5060000 
 				$code = "5060000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5060000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5060000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5060000[$branch] = $account_5060000_debet[$branch] - $account_5060000_credit[$branch];
@@ -1022,7 +1057,7 @@ class Konsolidasi extends Front_Controller{
 				//5070000 
 				$code = "5070000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5070000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5070000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5070000[$branch] = $account_5070000_debet[$branch] - $account_5070000_credit[$branch];
@@ -1032,7 +1067,7 @@ class Konsolidasi extends Front_Controller{
 				//5080000 
 				$code = "5080000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5080000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5080000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5080000[$branch] = $account_5080000_debet[$branch] - $account_5080000_credit[$branch];
@@ -1048,10 +1083,11 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_beban_operasional_total[2] < 0 ? "(".number_format(abs($account_beban_operasional_total[2])).")" : number_format($account_beban_operasional_total[2])).'</td>
 								<td align="right" class="border_btm">'.($account_beban_operasional_total[5] < 0 ? "(".number_format(abs($account_beban_operasional_total[5])).")" : number_format($account_beban_operasional_total[5])).'</td>
 								<td align="right" class="border_btm">'.($account_beban_operasional_total[6] < 0 ? "(".number_format(abs($account_beban_operasional_total[6])).")" : number_format($account_beban_operasional_total[6])).'</td>
+								<td align="right" class="border_btm">'.($account_beban_operasional_total[7] < 0 ? "(".number_format(abs($account_beban_operasional_total[7])).")" : number_format($account_beban_operasional_total[7])).'</td>
 							</tr>';	
 				//Jumlah Beban
 				$beban_konsolidasi_total = $account_beban_pembiayaan_konsolidasi + $account_beban_operasional_konsolidasi;
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$beban_total[$branch] = $account_beban_pembiayaan_total[$branch] + $account_beban_operasional_total[$branch];
 				}
 				$print .= '	<tr><td align="left" >Jumlah</td>
@@ -1063,14 +1099,15 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($beban_total[2] < 0 ? "(".number_format(abs($beban_total[2])).")" : number_format($beban_total[2])).'</td>
 								<td align="right" class="border_btm">'.($beban_total[5] < 0 ? "(".number_format(abs($beban_total[5])).")" : number_format($beban_total[5])).'</td>
 								<td align="right" class="border_btm">'.($beban_total[6] < 0 ? "(".number_format(abs($beban_total[6])).")" : number_format($beban_total[6])).'</td>
+								<td align="right" class="border_btm">'.($beban_total[7] < 0 ? "(".number_format(abs($beban_total[7])).")" : number_format($beban_total[7])).'</td>
 							</tr>';		
 				
 				//SHU
 				$shu_konsolidasi = $account_pendapatan_konsolidasi-$beban_konsolidasi_total;
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$shu[$branch] = $account_pendapatan_total[$branch] - $beban_total[$branch];
 				}
-				$print .= '	<tr><td align="left" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';
 				$print .= '	<tr><td align="left" ><b>Sisa Hasil Usaha Operasional</b></td>
 								<td align="right" >'.($shu_konsolidasi < 0 ? "(".number_format(abs($shu_konsolidasi)).")" : number_format($shu_konsolidasi)).'</td>
 								<td align="right" >'.($shu[0] < 0 ? "(".number_format(abs($shu[0])).")" : number_format($shu[0])).'</td>
@@ -1080,13 +1117,14 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($shu[2] < 0 ? "(".number_format(abs($shu[2])).")" : number_format($shu[2])).'</td>
 								<td align="right" >'.($shu[5] < 0 ? "(".number_format(abs($shu[5])).")" : number_format($shu[5])).'</td>
 								<td align="right" >'.($shu[6] < 0 ? "(".number_format(abs($shu[6])).")" : number_format($shu[6])).'</td>
+								<td align="right" >'.($shu[7] < 0 ? "(".number_format(abs($shu[7])).")" : number_format($shu[7])).'</td>
 							</tr>';	
 				
 				//Pendapatan (beban) lainnya
 				//4030000 Pendapatan Lain-lain
 				$code = "4030000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_4030000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_4030000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_4030000[$branch] = $account_4030000_credit[$branch] - $account_4030000_debet[$branch];
@@ -1096,7 +1134,7 @@ class Konsolidasi extends Front_Controller{
 				//5090000 Beban Non Operasional
 				$code = "5090000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_5090000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5090000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_5090000[$branch] = $account_5090000_debet[$branch] - $account_5090000_credit[$branch];
@@ -1105,12 +1143,12 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Jumlah Lain-lain
 				$account_lain_lain_konsolidasi = $account_4030000_konsolidasi - $account_5090000_konsolidasi;
-				for($branch=0; $branch <=6; $branch++){					
+				for($branch=0; $branch <=7; $branch++){					
 					$account_lain_lain[$branch] = $account_pendapatan_lain[$branch] - $account_beban_lain[$branch];
 				}
-				$print .= '	<tr><td align="left" colspan="8"> &nbsp;</td></tr>';
+				$print .= '	<tr><td align="left" colspan="9"> &nbsp;</td></tr>';
 				$print .= '	<tr><td align="left" ><b><u>Pendapatan (beban) lainnya</u></b></td>
-								<td colspan="8" ></td>
+								<td colspan="9" ></td>
 							</tr>';	
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pendapatan Lain-lain</b></td>
 								<td align="right" >'.($account_4030000_konsolidasi < 0 ? "(".number_format(abs($account_4030000_konsolidasi)).")" : number_format($account_4030000_konsolidasi)).'</td>
@@ -1121,6 +1159,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" >'.($account_4030000[2] < 0 ? "(".number_format(abs($account_4030000[2])).")" : number_format($account_4030000[2])).'</td>
 								<td align="right" >'.($account_4030000[5] < 0 ? "(".number_format(abs($account_4030000[5])).")" : number_format($account_4030000[5])).'</td>
 								<td align="right" >'.($account_4030000[6] < 0 ? "(".number_format(abs($account_4030000[6])).")" : number_format($account_4030000[6])).'</td>
+								<td align="right" >'.($account_4030000[7] < 0 ? "(".number_format(abs($account_4030000[7])).")" : number_format($account_4030000[7])).'</td>
 							</tr>';	
 				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beban Lain-lain</b></td>
 								<td align="right" class="border_btm">'.($account_5090000_konsolidasi < 0 ? "(".number_format(abs($account_5090000_konsolidasi)).")" : number_format($account_5090000_konsolidasi)).'</td>
@@ -1131,6 +1170,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_5090000[2] < 0 ? "(".number_format(abs($account_5090000[2])).")" : number_format($account_5090000[2])).'</td>
 								<td align="right" class="border_btm">'.($account_5090000[5] < 0 ? "(".number_format(abs($account_5090000[5])).")" : number_format($account_5090000[5])).'</td>
 								<td align="right" class="border_btm">'.($account_5090000[6] < 0 ? "(".number_format(abs($account_5090000[6])).")" : number_format($account_5090000[6])).'</td>
+								<td align="right" class="border_btm">'.($account_5090000[7] < 0 ? "(".number_format(abs($account_5090000[7])).")" : number_format($account_5090000[7])).'</td>
 							</tr>';
 				$print .= '	<tr><td align="left" >Total</td>
 								<td align="right" class="border_btm">'.($account_lain_lain_konsolidasi < 0 ? "(".number_format(abs($account_lain_lain_konsolidasi)).")" : number_format($account_lain_lain_konsolidasi)).'</td>
@@ -1141,14 +1181,15 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm">'.($account_lain_lain[2] < 0 ? "(".number_format(abs($account_lain_lain[2])).")" : number_format($account_lain_lain[2])).'</td>
 								<td align="right" class="border_btm">'.($account_lain_lain[5] < 0 ? "(".number_format(abs($account_lain_lain[5])).")" : number_format($account_lain_lain[5])).'</td>
 								<td align="right" class="border_btm">'.($account_lain_lain[6] < 0 ? "(".number_format(abs($account_lain_lain[6])).")" : number_format($account_lain_lain[6])).'</td>
+								<td align="right" class="border_btm">'.($account_lain_lain[7] < 0 ? "(".number_format(abs($account_lain_lain[7])).")" : number_format($account_lain_lain[7])).'</td>
 							</tr>';
 				
 				//SHU Bersih
 				$shu_bersih_konsolidasi = $shu_konsolidasi + $account_lain_lain_konsolidasi;
-				for($branch=0; $branch <=6; $branch++){					
+				for($branch=0; $branch <=7; $branch++){					
 					$shu_bersih[$branch] = $shu[$branch] + $account_lain_lain[$branch];
 				}
-				$print .= '	<tr><td align="left" ></td><td align="left" colspan="8" class="border_btm"> &nbsp;</td></tr>';
+				$print .= '	<tr><td align="left" ></td><td align="left" colspan="9" class="border_btm"> &nbsp;</td></tr>';
 				$print .= '	<tr><td align="left" ><b>Sisa Hasil Usaha Bersih</b></td>
 								<td align="right" class="border_btm_double"><b>'.($shu_bersih_konsolidasi < 0 ? "(".number_format(abs($shu_bersih_konsolidasi)).")" : number_format($shu_bersih_konsolidasi)).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($shu_bersih[0] < 0 ? "(".number_format(abs($shu_bersih[0])).")" : number_format($shu_bersih[0])).'</b></td>
@@ -1158,6 +1199,7 @@ class Konsolidasi extends Front_Controller{
 								<td align="right" class="border_btm_double"><b>'.($shu_bersih[2] < 0 ? "(".number_format(abs($shu_bersih[2])).")" : number_format($shu_bersih[2])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($shu_bersih[5] < 0 ? "(".number_format(abs($shu_bersih[5])).")" : number_format($shu_bersih[5])).'</b></td>
 								<td align="right" class="border_btm_double"><b>'.($shu_bersih[6] < 0 ? "(".number_format(abs($shu_bersih[6])).")" : number_format($shu_bersih[6])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($shu_bersih[7] < 0 ? "(".number_format(abs($shu_bersih[7])).")" : number_format($shu_bersih[7])).'</b></td>
 							
 							</tr>';	
 			$this->template	->set('menu_title', 'Laporan Laba Rugi Konsolidasi')
@@ -1546,7 +1588,7 @@ class Konsolidasi extends Front_Controller{
 				//1010000
 				$code = "1010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000[$branch] = $account_1010000_debet[$branch] - $account_1010000_credit[$branch] ;
@@ -1557,7 +1599,7 @@ class Konsolidasi extends Front_Controller{
 				//1020000 
 				$code = "1020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000[$branch] = $account_1020000_debet[$branch] - $account_1020000_credit[$branch];
@@ -1583,7 +1625,7 @@ class Konsolidasi extends Front_Controller{
 				
 				//Piutang MBA 1030102
 				$code = "1030102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102[$branch] = $account_1030102_debet[$branch] - $account_1030102_credit[$branch];
@@ -1593,7 +1635,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang IJA 1030103
 				$code = "1030103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103[$branch] = $account_1030103_debet[$branch] - $account_1030103_credit[$branch];
@@ -1603,7 +1645,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang QH 1030104
 				$code = "1030104";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030104_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030104_debet[$branch] - $account_1030104_credit[$branch];
@@ -1618,7 +1660,7 @@ class Konsolidasi extends Front_Controller{
 				
 				//Piutang QH 1030504
 				$code = "1030504";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030504_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030504_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030504_debet[$branch] - $account_1030504_credit[$branch];
@@ -1629,7 +1671,7 @@ class Konsolidasi extends Front_Controller{
 				
 				$code = "1030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200[$branch] = $account_1030200_debet[$branch] - $account_1030200_credit[$branch];
@@ -1644,7 +1686,7 @@ class Konsolidasi extends Front_Controller{
 				//Piutang Cabang 1030400
 				$code = "1030400";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030400_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400[$branch] = $account_1030400_debet[$branch] - $account_1030400_credit[$branch];
@@ -1705,7 +1747,7 @@ class Konsolidasi extends Front_Controller{
 				//Beban dibayar dimuka 1050000
 				$code = "1050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000[$branch] = $account_1050000_debet[$branch] - $account_1050000_credit[$branch];
@@ -1715,7 +1757,7 @@ class Konsolidasi extends Front_Controller{
 				//Persediaan Barang Cetakan 1060000
 				$code = "1060000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1060000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000[$branch] = $account_1060000_debet[$branch] - $account_1060000_credit[$branch];
@@ -1764,7 +1806,7 @@ class Konsolidasi extends Front_Controller{
 			
 				//Aset Tetap setelah dikurangi = 1080301 + 1080302				
 				$code = "1080301";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080301_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301[$branch] = $account_1080301_debet[$branch] - $account_1080301_credit[$branch];
@@ -1773,7 +1815,7 @@ class Konsolidasi extends Front_Controller{
 					$account_aset_tidak_lancar[$branch] += $account_1080301[$branch];
 				}
 				$code = "1080302";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080302_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302[$branch] = $account_1080302_debet[$branch] - $account_1080302_credit[$branch];
@@ -1786,7 +1828,7 @@ class Konsolidasi extends Front_Controller{
 				//Aset Lain	1090000
 				$code = "1090000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1090000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000[$branch] = $account_1090000_debet[$branch] - $account_1090000_credit[$branch];
@@ -1830,7 +1872,7 @@ class Konsolidasi extends Front_Controller{
 				$objPHPExcel->getActiveSheet()->getStyle('B19:I19')->applyFromArray($style_border_top_btm);
 				
 			//JUMLAH ASET
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_aset[$branch] += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 				$account_aset_konsolidasi += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 			}
@@ -1859,7 +1901,7 @@ class Konsolidasi extends Front_Controller{
 				//Simpanan Anggota 2010000
 				$code = "2010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000[$branch] = $account_2010000_credit[$branch] - $account_2010000_debet[$branch];
@@ -1870,7 +1912,7 @@ class Konsolidasi extends Front_Controller{
 				//Simpanan Berjangka 2020000
 				$code = "2020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000[$branch] = $account_2020000_credit[$branch] - $account_2020000_debet[$branch];
@@ -1881,7 +1923,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Pembiayaan 2030000
 				$code = "2030000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2030000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000[$branch] = $account_2030000_credit[$branch] - $account_2030000_debet[$branch];
@@ -1893,7 +1935,7 @@ class Konsolidasi extends Front_Controller{
 				/*//Hutang Pembiayaan Kantor Pusat 2030200*/
 				$code = "2030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					//$account_2030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					//$account_2030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					//$account_2030200[$branch] = $account_2030200_credit[$branch] - $account_2030200_debet[$branch];
@@ -1906,7 +1948,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Leasing 2040000
 				$code = "2040000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2040000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000[$branch] = $account_2040000_credit[$branch] - $account_2040000_debet[$branch];
@@ -1917,7 +1959,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Lain-lain 2050000
 				$code = "2050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000[$branch] = $account_2050000_credit[$branch] - $account_2050000_debet[$branch];
@@ -1925,7 +1967,7 @@ class Konsolidasi extends Front_Controller{
 					$account_liabilitas[$branch] += $account_2050000[$branch];
 				}
 				
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_liabilitas_konsolidasi += $account_liabilitas[$branch];
 				}
 				
@@ -2016,7 +2058,7 @@ class Konsolidasi extends Front_Controller{
 			
 				//Simpanan Pokok 3010102
 				$code = "3010102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102[$branch] = $account_3010102_credit[$branch] - $account_3010102_debet[$branch];
@@ -2026,7 +2068,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//Simpanan Wajib 3010101
 				$code = "3010101";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010101_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101[$branch] = $account_3010101_credit[$branch] - $account_3010101_debet[$branch];
@@ -2036,7 +2078,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Hibah 3010103
 				$code = "3010103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103[$branch] = $account_3010103_credit[$branch] - $account_3010103_debet[$branch];
@@ -2046,7 +2088,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Modal Penyertaan 3010201
 				$code = "3010201";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010201_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201[$branch] = $account_3010201_credit[$branch] - $account_3010201_debet[$branch];
@@ -2056,7 +2098,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//SHU Tahun Lalu
 				$code = "3020001";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020001_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001[$branch] = $account_3020001_credit[$branch] - $account_3020001_debet[$branch];
@@ -2064,7 +2106,7 @@ class Konsolidasi extends Front_Controller{
 					$account_ekuitas[$branch] += $account_3020001[$branch];
 					$account_ekuitas_konsolidasi += $account_3020001[$branch];
 				}
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020002[$branch] = $this->hitung_laba_rugi($date_start,$date_end,$branch);
 					$account_3020002_konsolidasi += $account_3020002[$branch];
 					$account_ekuitas[$branch] += $account_3020002[$branch];
@@ -2159,7 +2201,7 @@ class Konsolidasi extends Front_Controller{
 			$objPHPExcel->getActiveSheet()->getStyle("B$no:I$no")->applyFromArray($style_border_top_btm);
 				
 			//JUMLAH lIABILITAS EKUITAS
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_liabilitas_ekuitas[$branch] += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 				$account_liabilitas_ekuitas_konsolidasi += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 			}
@@ -2183,7 +2225,7 @@ class Konsolidasi extends Front_Controller{
 			
 			//SELISIH
 			$selisih = $account_aset_konsolidasi - $account_liabilitas_ekuitas_konsolidasi;	
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_selisih[$branch] += $account_aset[$branch] - $account_liabilitas_ekuitas[$branch];
 			}	
 				
@@ -2350,7 +2392,7 @@ class Konsolidasi extends Front_Controller{
 			
 			
 			//PENDAPATAN
-			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="8" ></td></tr>';
+			$print .= '	<tr><td align="left" ><b>Pendapatan</b></td>	<td colspan="9" ></td></tr>';
 			
 			$cell_no = 5;
 			$objPHPExcel->getActiveSheet()->setCellValue("A$cell_no", "Pendapatan");
@@ -2361,7 +2403,7 @@ class Konsolidasi extends Front_Controller{
 				//1010000
 				$code = "1010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1010000[$branch] = $account_1010000_debet[$branch] - $account_1010000_credit[$branch] ;
@@ -2372,7 +2414,7 @@ class Konsolidasi extends Front_Controller{
 				//1020000 
 				$code = "1020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1020000[$branch] = $account_1020000_debet[$branch] - $account_1020000_credit[$branch];
@@ -2398,7 +2440,7 @@ class Konsolidasi extends Front_Controller{
 				
 				//Piutang MBA 1030102
 				$code = "1030102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030102[$branch] = $account_1030102_debet[$branch] - $account_1030102_credit[$branch];
@@ -2408,7 +2450,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang IJA 1030103
 				$code = "1030103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030103[$branch] = $account_1030103_debet[$branch] - $account_1030103_credit[$branch];
@@ -2418,7 +2460,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Piutang QH 1030104
 				$code = "1030104";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030104_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030104_debet[$branch] - $account_1030104_credit[$branch];
@@ -2433,7 +2475,7 @@ class Konsolidasi extends Front_Controller{
 				
 				//Piutang QH 1030504
 				$code = "1030504";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030504_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1030504_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1030104[$branch] = $account_1030504_debet[$branch] - $account_1030504_credit[$branch];
@@ -2444,7 +2486,7 @@ class Konsolidasi extends Front_Controller{
 				
 				$code = "1030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030200[$branch] = $account_1030200_debet[$branch] - $account_1030200_credit[$branch];
@@ -2459,7 +2501,7 @@ class Konsolidasi extends Front_Controller{
 				//Piutang Cabang 1030400
 				$code = "1030400";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1030400_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					$account_1030400[$branch] = $account_1030400_debet[$branch] - $account_1030400_credit[$branch];
@@ -2520,7 +2562,7 @@ class Konsolidasi extends Front_Controller{
 				//Beban dibayar dimuka 1050000
 				$code = "1050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1050000[$branch] = $account_1050000_debet[$branch] - $account_1050000_credit[$branch];
@@ -2530,7 +2572,7 @@ class Konsolidasi extends Front_Controller{
 				//Persediaan Barang Cetakan 1060000
 				$code = "1060000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1060000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1060000[$branch] = $account_1060000_debet[$branch] - $account_1060000_credit[$branch];
@@ -2579,7 +2621,7 @@ class Konsolidasi extends Front_Controller{
 			
 				//Aset Tetap setelah dikurangi = 1080301 + 1080302				
 				$code = "1080301";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080301_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080301[$branch] = $account_1080301_debet[$branch] - $account_1080301_credit[$branch];
@@ -2588,7 +2630,7 @@ class Konsolidasi extends Front_Controller{
 					$account_aset_tidak_lancar[$branch] += $account_1080301[$branch];
 				}
 				$code = "1080302";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1080302_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_1080302[$branch] = $account_1080302_debet[$branch] - $account_1080302_credit[$branch];
@@ -2601,7 +2643,7 @@ class Konsolidasi extends Front_Controller{
 				//Aset Lain	1090000
 				$code = "1090000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_1090000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_1090000[$branch] = $account_1090000_debet[$branch] - $account_1090000_credit[$branch];
@@ -2645,7 +2687,7 @@ class Konsolidasi extends Front_Controller{
 				$objPHPExcel->getActiveSheet()->getStyle('B19:I19')->applyFromArray($style_border_top_btm);
 				
 			//JUMLAH ASET
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_aset[$branch] += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 				$account_aset_konsolidasi += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
 			}
@@ -2674,7 +2716,7 @@ class Konsolidasi extends Front_Controller{
 				//Simpanan Anggota 2010000
 				$code = "2010000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2010000[$branch] = $account_2010000_credit[$branch] - $account_2010000_debet[$branch];
@@ -2685,7 +2727,7 @@ class Konsolidasi extends Front_Controller{
 				//Simpanan Berjangka 2020000
 				$code = "2020000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2020000[$branch] = $account_2020000_credit[$branch] - $account_2020000_debet[$branch];
@@ -2696,7 +2738,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Pembiayaan 2030000
 				$code = "2030000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2030000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2030000[$branch] = $account_2030000_credit[$branch] - $account_2030000_debet[$branch];
@@ -2708,7 +2750,7 @@ class Konsolidasi extends Front_Controller{
 				/*//Hutang Pembiayaan Kantor Pusat 2030200*/
 				$code = "2030200";
 				$code_level2 = substr($code,0,5);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					//$account_2030200_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
 					//$account_2030200_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
 					//$account_2030200[$branch] = $account_2030200_credit[$branch] - $account_2030200_debet[$branch];
@@ -2721,7 +2763,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Leasing 2040000
 				$code = "2040000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2040000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2040000[$branch] = $account_2040000_credit[$branch] - $account_2040000_debet[$branch];
@@ -2732,7 +2774,7 @@ class Konsolidasi extends Front_Controller{
 				//Hutang Lain-lain 2050000
 				$code = "2050000";
 				$code_level1 = substr($code,0,3);
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_2050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
 					$account_2050000[$branch] = $account_2050000_credit[$branch] - $account_2050000_debet[$branch];
@@ -2740,7 +2782,7 @@ class Konsolidasi extends Front_Controller{
 					$account_liabilitas[$branch] += $account_2050000[$branch];
 				}
 				
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_liabilitas_konsolidasi += $account_liabilitas[$branch];
 				}
 				
@@ -2831,7 +2873,7 @@ class Konsolidasi extends Front_Controller{
 			
 				//Simpanan Pokok 3010102
 				$code = "3010102";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010102[$branch] = $account_3010102_credit[$branch] - $account_3010102_debet[$branch];
@@ -2841,7 +2883,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//Simpanan Wajib 3010101
 				$code = "3010101";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010101_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010101[$branch] = $account_3010101_credit[$branch] - $account_3010101_debet[$branch];
@@ -2851,7 +2893,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Hibah 3010103
 				$code = "3010103";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010103[$branch] = $account_3010103_credit[$branch] - $account_3010103_debet[$branch];
@@ -2861,7 +2903,7 @@ class Konsolidasi extends Front_Controller{
 				}
 				//Modal Penyertaan 3010201
 				$code = "3010201";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3010201_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3010201[$branch] = $account_3010201_credit[$branch] - $account_3010201_debet[$branch];
@@ -2871,7 +2913,7 @@ class Konsolidasi extends Front_Controller{
 				}	
 				//SHU Tahun Lalu
 				$code = "3020001";
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020001_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
 					$account_3020001[$branch] = $account_3020001_credit[$branch] - $account_3020001_debet[$branch];
@@ -2879,7 +2921,7 @@ class Konsolidasi extends Front_Controller{
 					$account_ekuitas[$branch] += $account_3020001[$branch];
 					$account_ekuitas_konsolidasi += $account_3020001[$branch];
 				}
-				for($branch=0; $branch <=6; $branch++){
+				for($branch=0; $branch <=7; $branch++){
 					$account_3020002[$branch] = $this->hitung_laba_rugi($date_start,$date_end,$branch);
 					$account_3020002_konsolidasi += $account_3020002[$branch];
 					$account_ekuitas[$branch] += $account_3020002[$branch];
@@ -2974,7 +3016,7 @@ class Konsolidasi extends Front_Controller{
 			$objPHPExcel->getActiveSheet()->getStyle("B$no:I$no")->applyFromArray($style_border_top_btm);
 				
 			//JUMLAH lIABILITAS EKUITAS
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_liabilitas_ekuitas[$branch] += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 				$account_liabilitas_ekuitas_konsolidasi += $account_liabilitas[$branch] + $account_ekuitas[$branch];
 			}
@@ -2998,7 +3040,7 @@ class Konsolidasi extends Front_Controller{
 			
 			//SELISIH
 			$selisih = $account_aset_konsolidasi - $account_liabilitas_ekuitas_konsolidasi;	
-			for($branch=0; $branch <=6; $branch++){
+			for($branch=0; $branch <=7; $branch++){
 				$account_selisih[$branch] += $account_aset[$branch] - $account_liabilitas_ekuitas[$branch];
 			}	
 				

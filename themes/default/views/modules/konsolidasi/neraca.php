@@ -45,6 +45,7 @@
 						<th class="text-center">KM</th>
 						<th class="text-center">TN</th>
 						<th class="text-center">CK</th>
+						<th class="text-center">PN</th>
 					  </tr>                  
 					</thead> 
 					<tbody>	
