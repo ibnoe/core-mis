@@ -191,38 +191,40 @@ class Ts_download extends Front_Controller{
 			$today=date("Y-m-d");
 			//print_r($clients );
 			foreach($clients as $c):
-			if($c->data_status != 4){
-				$margin=0;
-				$angsuranke=0;
-				$angsuranke_sekarang = 0;
-				$angsuran_pokok=0;
-				$angsuran_profit=0;
-				$sisa_pokok=0;
-				$sisa_profit=0;
-				if($c->data_status == 1){
-					$status = "A";
-					$id_pembiayaan = $c->data_id;
-					$margin = $c->data_margin;
-					$angsuranke= $c->data_angsuranke;
-					$angsuranke_sekarang= $c->data_angsuranke;
-					//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
-					$date_tagihan_pertama = $c->data_date_first;
-					$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
-					$pertemuanke_sekarang= floor($diff / 604800)  + 2;
-					$plafond=  $c->data_plafond / 1000;
-					$angsuran_pokok=  $c->data_angsuranpokok;
-					$angsuran_profit= $c->data_margin / 50 ;
-					$totalangsuran = $c->data_totalangsuran;
-					$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
-					$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
-					$total_tabwajib += $c->data_tabunganwajib;
-					$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
-					$data_par = $c->data_par;
-				}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
-					$status = "T";
-				}else{
-					$status = "P";
-				}
+			
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						$totalangsuran = $c->data_totalangsuran;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+				
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
 				$absen_s=0;
 				$absen_c=0;
 				$absen_i=0;
@@ -295,12 +297,17 @@ class Ts_download extends Front_Controller{
 				$total_tabberjangka += $data_tabberjangka_plafond;
 				if($no == 5 OR $no == 10 OR $no == 15 OR $no == 20 OR $no == 25){ 
 					$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
-					$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; $subtotal_angsuran = 0; $subtotal_tabberjangka = 0;
+					$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+					$subtotal_angsuran = 0; 
+					$subtotal_tabberjangka = 0;
 				}
 				
 			$no++;
 			}//endif
 			endforeach;
+			
+			
+			
 			if($total_client != 5 OR $total_client != 10 OR $total_client != 15 OR $total_client != 20 OR $total_client != 25 OR $total_client != 30){
 				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
 				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; $subtotal_angsuran = 0; $subtotal_tabberjangka = 0;
@@ -421,7 +428,13 @@ class Ts_download extends Front_Controller{
 			$total_client = $this->clients_model->count_client_by_group($group_id);	
 			
 			//Get client detail
-			$clients = $this->clients_model->get_pembiayaan_by_group($group_id);
+			//$clients = $this->clients_model->get_pembiayaan_by_group($group_id);
+			$clients_a = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'A');
+			$clients_b = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'B');
+			$clients_c = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'C');
+			$clients_d = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'D');
+			$clients_e = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'E');
+			$clients_f = $this->clients_model->get_pembiayaan_by_group_by_subgroup($group_id,'F');
 			
 			//Count TR per group
 			$group_tr = $this->clients_pembiayaan_model->count_tr_by_group($group_id);		
@@ -486,7 +499,7 @@ class Ts_download extends Front_Controller{
 			$html .= '<div class="topsheet_head2">';
 			$html .= '<table border="0" >';
 			$html .= '<tr><td>Area</td><td>: '.$group->area_name.'</td></tr>';
-			$html .= '<tr><td>Cabang</td><td>: '.$group->area_code.$group->branch_code.' '.$group->branch_name.'</td></tr>';
+			$html .= '<tr><td>Cabang</td><td>: '.$group->branch_name.'</td></tr>';
 			$html .= '<tr><td>Majelis</td><td>: <b>'.$group->group_name.'</b></td></tr>';
 			$html .= '</table>';
 			$html .= '</div>';
@@ -563,126 +576,737 @@ class Ts_download extends Front_Controller{
 			$no=1;
 			$today=date("Y-m-d");
 			//print_r($clients );
-			foreach($clients as $c):
-			if($c->data_status != 4){
-				$margin=0;
-				$angsuranke=0;
-				$angsuranke_sekarang = 0;
-				$angsuran_pokok=0;
-				$angsuran_profit=0;
-				$sisa_pokok=0;
-				$sisa_profit=0;
-				if($c->data_status == 1){
-					$status = "A";
-					$id_pembiayaan = $c->data_id;
-					$margin = $c->data_margin;
-					$angsuranke= $c->data_angsuranke;
-					$angsuranke_sekarang= $c->data_angsuranke;
-					//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
-					$date_tagihan_pertama = $c->data_date_first;
-					$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
-					$pertemuanke_sekarang= floor($diff / 604800)  + 2;
-					$plafond=  $c->data_plafond / 1000;
-					$angsuran_pokok=  $c->data_angsuranpokok;
-					$angsuran_profit= $c->data_margin / 50 ;
-					//$totalangsuran = $c->data_totalangsuran;
-					$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
-					$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
-					$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
-					$total_tabwajib += $c->data_tabunganwajib;
-					$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
-					$data_par = $c->data_par;
-				}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
-					$status = "T";
-				}else{
-					$status = "P";
-				}
-				$absen_s=0;
-				$absen_c=0;
-				$absen_i=0;
-				$absen_a=0;
-				if($id_pembiayaan!="" OR $id_pembiayaan!=0){
-					$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
-					$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
-					$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
-					$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
-				}else{ 
+			foreach($clients_a as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
 					$absen_s=0;
 					$absen_c=0;
 					$absen_i=0;
 					$absen_a=0;
-				}
-				$data_tr = $c->data_tr; 
-				if($data_tr == 0){$data_tr = "-";}
-				
-				$html .= '<tr>';
-				$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
-				$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
-				$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
-				$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
-				$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
-				$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
-				$html .= '<td class="nobdr">&nbsp;</td>';
-				$html .= '<td class="bdr_btm">&nbsp;</td>';
-				$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
-				if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
-				if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
-				$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
-				$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
-				
-				//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
-				if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
-					$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
-				}else{ $data_totalangsuran = "-";}  
-				if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
-				$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
-				$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
-				$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
-				$html .= '<td align="center" class="bdr_btm">-</td>';
-				$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
-				if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
-				$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
-				$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
-				$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
-				$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
-				
-				//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
-				if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
-					$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
-					$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
-					$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
-				}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
-				
-				$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
-				$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
-				$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
-				$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
-				$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
-				$html .= '<td class="bdr_btm">&nbsp;</td>';				
-				$html .= '</tr>';
-				
-				//PRINT SUBTOTAL
-				$subtotal_angsuran += $data_totalangsuran;
-				$subtotal_tabberjangka += $data_tabberjangka_plafond;
-				$total_tabberjangka += $data_tabberjangka_plafond;
-				if($no == 5 OR $no == 10 OR $no == 15 OR $no == 20 OR $no == 25){ 
-					$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
-					$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; $subtotal_angsuran = 0; $subtotal_tabberjangka = 0;
-				}
-				
-			$no++;
-			}//endif
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
 			endforeach;
-			if($total_client != 5 OR $total_client != 10 OR $total_client != 15 OR $total_client != 20 OR $total_client != 25 OR $total_client != 30){
+			if(count($clients_a) > 0){
 				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
-				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; $subtotal_angsuran = 0; $subtotal_tabberjangka = 0;
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
 			}
+			
+			
+			//SUBGROUP B
+			
+			foreach($clients_b as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
+					$absen_s=0;
+					$absen_c=0;
+					$absen_i=0;
+					$absen_a=0;
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
+			endforeach;
+			if(count($clients_b) > 0){
+				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
+			}
+			
+			//SUBGROUP C
+			
+			foreach($clients_c as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
+					$absen_s=0;
+					$absen_c=0;
+					$absen_i=0;
+					$absen_a=0;
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
+			endforeach;
+			if(count($clients_c) > 0){
+				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
+			}
+			
+			//SUBGROUP D
+			foreach($clients_d as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
+					$absen_s=0;
+					$absen_c=0;
+					$absen_i=0;
+					$absen_a=0;
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
+			endforeach;
+			if(count($clients_d) > 0){
+				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
+			}
+			
+			//SUBGROUP E
+			
+			foreach($clients_e as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
+					$absen_s=0;
+					$absen_c=0;
+					$absen_i=0;
+					$absen_a=0;
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
+			endforeach;
+			if(count($clients_e) > 0){
+				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
+			}
+			
+			//SUBGROUP F
+			
+			foreach($clients_f as $c):
+				if($c->data_status != 4){
+					$margin=0;
+					$angsuranke=0;
+					$angsuranke_sekarang = 0;
+					$angsuran_pokok=0;
+					$angsuran_profit=0;
+					$sisa_pokok=0;
+					$sisa_profit=0;
+					if($c->data_status == 1){
+						$status = "A";
+						$id_pembiayaan = $c->data_id;
+						$margin = $c->data_margin;
+						$angsuranke= $c->data_angsuranke;
+						$angsuranke_sekarang= $c->data_angsuranke;
+						//$pertemuanke_sekarang = $c->data_pertemuanke + 1;
+						$date_tagihan_pertama = $c->data_date_first;
+						$diff = strtotime($today, 0) - strtotime($date_tagihan_pertama, 0);
+						$pertemuanke_sekarang= floor($diff / 604800)  + 2;
+						$plafond=  $c->data_plafond / 1000;
+						$angsuran_pokok=  $c->data_angsuranpokok;
+						$angsuran_profit= $c->data_margin / 50 ;
+						//$totalangsuran = $c->data_totalangsuran;
+						$totalangsuran = ($c->data_plafond+$c->data_margin)/50;
+						$sisa_pokok  = ((50-$angsuranke) * $angsuran_pokok)/1000;
+						$sisa_profit = ((50-$angsuranke) * $angsuran_profit)/1000;
+						$total_tabwajib += $c->data_tabunganwajib;
+						$grand_totalangsuran += $totalangsuran + $c->data_tabunganwajib;					
+						$data_par = $c->data_par;
+					}elseif($c->data_status == 2 AND $c->data_date_accept == "$date_next_week_2"){
+						$status = "T";
+					}else{
+						$status = "P";
+					}
+					$absen_s=0;
+					$absen_c=0;
+					$absen_i=0;
+					$absen_a=0;
+					if($id_pembiayaan!="" OR $id_pembiayaan!=0){
+						$absen_s = $this->clients_model->count_absen_s($id_pembiayaan);
+						$absen_c = $this->clients_model->count_absen_c($id_pembiayaan);
+						$absen_i = $this->clients_model->count_absen_i($id_pembiayaan);
+						$absen_a = $this->clients_model->count_absen_a($id_pembiayaan);
+					}else{ 
+						$absen_s=0;
+						$absen_c=0;
+						$absen_i=0;
+						$absen_a=0;
+					}
+					$data_tr = $c->data_tr; 
+					if($data_tr == 0){$data_tr = "-";}
+					
+					$html .= '<tr>';
+					$html .= '<td align="center" class="bdr_btm">'.$no.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_account.'</td>';
+					$html .= '<td class="bdr_btm">'.$c->client_fullname.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_s.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_c.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_i.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$absen_a.'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$data_tr.'</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>'; //hadir
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>'; //space
+					$html .= '<td align="right" class="bdr_btm" >'.number_format($plafond,0).'</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$status.'</td>';
+					$html .= '<td class="nobdr">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">'.$angsuranke_sekarang.'</td>';
+					if($c->data_status == 1){ $data_sisa_pokok=number_format($sisa_pokok,1); }else{ $data_sisa_pokok = "-";} ;
+					if($c->data_status == 1){ $data_sisa_profit=number_format($sisa_profit,1); }else{ $data_sisa_profit = "-";} ;
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_pokok.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_sisa_profit.'</td>';
+					
+					//if($c->data_status == 1 AND $data_sisa_pokok!="-"){ $data_totalangsuran=number_format((($c->data_totalangsuran + $c->data_tabunganwajib)/1000),1); }else{ $data_totalangsuran = "-";}  
+					if($c->data_status == 1 AND $data_sisa_pokok!="-"){ 
+						$data_totalangsuran=number_format((((($c->data_plafond+$c->data_margin)/50) + $c->data_tabunganwajib)/1000),1); 
+					}else{ $data_totalangsuran = "-";}  
+					if($c->tabwajib_saldo){ $data_tabwajib=number_format(($c->tabwajib_saldo/1000),1);}else{ $data_tabwajib="0";}
+					$html .= '<td class="bdr_btm" align="right">'.$data_tabwajib.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_totalangsuran.'</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td align="center" class="bdr_btm">-</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					if($c->tabsukarela_saldo){ $data_tabsukarela=number_format(($c->tabsukarela_saldo/1000),1);}else{ $data_tabsukarela="0"; }
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabsukarela.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					
+					//if($c->tabberjangka_saldo!="" AND $c->tabberjangka_credit == 0){ 
+					if($c->tabberjangka_saldo!="" AND $c->tabberjangka_status == 1){ 
+						$data_tabberjangka=number_format(($c->tabberjangka_saldo/1000),1);
+						$data_tabberjangka_ke=$c->tabberjangka_angsuranke;
+						$data_tabberjangka_plafond=number_format(($c->tabberjangka_plafond/1000),1);
+					}else{ $data_tabberjangka="-"; $data_tabberjangka_ke="-"; $data_tabberjangka_plafond="-"; }
+					
+					$html .= '<td align="center" class="bdr_btm">'.$data_tabberjangka_ke.'</td>';
+					$html .= '<td align="right" class="bdr_btm">'.$data_tabberjangka.'</td>';
+					$html .= '<td align="right" class="bdr_leftbtm">'.$data_tabberjangka_plafond.'</td>';
+					$html .= '<td class="bdr_leftbtm">&nbsp;</td>';
+					$html .= '<td class="nobdr" width="2px">&nbsp;</td>';
+					$html .= '<td class="bdr_btm">&nbsp;</td>';				
+					$html .= '</tr>';
+					
+					//PRINT SUBTOTAL
+					$subtotal_angsuran += $data_totalangsuran;
+					$subtotal_tabberjangka += $data_tabberjangka_plafond;
+					$total_tabberjangka += $data_tabberjangka_plafond;
+								
+				$no++;
+				}//endif
+			endforeach;
+			if(count($clients_f) > 0){
+				$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+				$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; 
+				$subtotal_angsuran = 0; 
+				$subtotal_tabberjangka = 0;
+			}
+			
+			
+			
+			//if($total_client != 5 OR $total_client != 10 OR $total_client != 15 OR $total_client != 20 OR $total_client != 25 OR $total_client != 30){
+			//	$html .=  "<tr><td colspan='18' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_angsuran,1)."</b></td><td colspan='7' class='nobdr'></td><td colspan='2' class='nobdr' align='right'>Subtotal</td><td class='nobdr' align='right'><b>".number_format($subtotal_tabberjangka,1)."</b></td><td colspan='3' class='nobdr'></td></tr>";
+			//	$html .=  "<tr><td colspan='32' class='bdr_btm'></td></tr>"; $subtotal_angsuran = 0; $subtotal_tabberjangka = 0;
+			//}
+			
 			$html .= '<tr>';
 				$html .= '<td class="nobdr"> </td>';
 				$html .= '<td class="nobdr"> </td>';

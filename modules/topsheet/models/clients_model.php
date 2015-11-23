@@ -71,6 +71,31 @@ class clients_model extends MY_Model {
 						->result();
 	}
 	
+	public function get_pembiayaan_by_group_by_subgroup($id,$subgroup)
+	{
+		return $this->db
+						->join('tbl_pembiayaan', 'tbl_pembiayaan.data_id = tbl_clients.client_pembiayaan_id', 'left')
+						//->join('tbl_pembiayaan', 'tbl_pembiayaan.data_client = tbl_clients.client_id', 'left')
+						->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_account = tbl_clients.client_account', 'left')
+						->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_account = tbl_clients.client_account', 'left')
+						->join('tbl_tabberjangka', 'tbl_tabberjangka.tabberjangka_account = tbl_clients.client_account', 'left')
+						//->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_client = tbl_clients.client_account', 'left')
+						//->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_account = tbl_clients.client_account', 'left')
+						//->join('tbl_tabberjangka', 'tbl_tabberjangka.tabberjangka_account = tbl_clients.client_account', 'left')
+						->where('client_group', $id)
+						->where('tbl_clients.client_status', '1')
+						->where('tbl_clients.deleted', '0')
+						->like('client_subgroup', $subgroup)
+						//->where('tbl_pembiayaan.deleted != 1')
+						//->where('tbl_tabwajib.deleted','0')
+						//->where('tbl_tabsukarela.deleted','0')
+						->order_by('client_subgroup','ASC')
+						->order_by('client_account','ASC')
+						//->where('tbl_pembiayaan.deleted', '0')
+						//->where('tbl_pembiayaan.data_status', '1')
+						->get('tbl_clients')
+						->result();
+	}
 	
 	public function count_client_by_group($id)
 	{
