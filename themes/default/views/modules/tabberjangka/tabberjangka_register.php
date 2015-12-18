@@ -62,9 +62,11 @@
 										<td><input type="text" name="client_date_<?php echo $i; ?>" 	value="" 	class="inp80 datepicker-input" data-date-format="yyyy-mm-dd" ></td>
 										<td>
 											<select name="client_paket_<?php echo $i; ?>" >
+												<option value="2000">Rp 2.000</option>
 												<option value="5000">Rp 5.000</option>
 												<option value="10000">Rp 10.000</option>
 												<option value="15000">Rp 15.000</option>
+												<option value="20000">Rp 20.000</option>
 												<option value="20000">Rp 20.000</option>
 
 											</select>										
