@@ -794,8 +794,15 @@ class Clients extends Front_Controller{
 					'data_pengeluaran_umum'				=> $this->input->post('data_pengeluaran_umum'),
 					'data_pengeluaran_angsuranlain'		=> $this->input->post('data_pengeluaran_angsuranlain'),
 					'data_pengeluaran_total'			=> $this->input->post('data_pengeluaran_total'),
-					'data_savingpower'					=> $this->input->post('data_savingpower'),
-					'data_sumber_pembiayaan'			=> $this->input->post('client_pembiayaan_sumber')
+					'data_savingpower'					=> $this->input->post('data_savingpower'),					
+					
+					'data_usaha_pendapatan'				=> $this->input->post('data_usaha_pendapatan'),
+					'data_usaha_biaya'					=> $this->input->post('data_usaha_biaya'),
+					'data_usaha_profit'					=> $this->input->post('data_usaha_profit'),
+					'data_usaha_aset'					=> $this->input->post('data_usaha_aset'),
+					'data_usaha_modal'					=> $this->input->post('data_usaha_modal'),
+					
+					'data_sumber_pembiayaan'			=> $this->input->post('client_pembiayaan_sumber'),
 					
 			);
 			

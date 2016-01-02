@@ -26,6 +26,7 @@
 						<li><a href="#asetrt" data-toggle="tab">Asset RT</a></li>
 						<li><a href="#pendapatan" data-toggle="tab">Pendapatan</a></li>
 						<li><a href="#pengeluaran" data-toggle="tab">Pengeluaran</a></li>
+						<li><a href="#usaha" data-toggle="tab">Analisa Usaha</a></li>
 						<li><a href="#pembiayaan" data-toggle="tab">Sumber</a></li>
 					</ul>
 				</div>
@@ -723,7 +724,48 @@
 								</div>
 							</div>
 						</div>
-
+						
+						<div class="tab-pane" id="usaha">
+							
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label"></label>
+								<div class="col-sm-4">									
+									<b>WAJIB IISI UNTUK PEMBIAYAAN LANJUTAN</b><br/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Pendapatan Usaha</label>
+								<div class="col-sm-4">
+									<input type="text" name="data_usaha_pendapatan" value="<?php echo set_value('data_usaha_pendapatan', isset($data->data_usaha_pendapatan) ? $data->data_usaha_pendapatan : ''); ?>" 	class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Biaya Usaha</label>
+								<div class="col-sm-4">
+									<input type="text" name="data_usaha_biaya" value="<?php echo set_value('data_usaha_biaya', isset($data->data_usaha_biaya) ? $data->data_usaha_biaya : ''); ?>" 	class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Net Profit (Pendapatan-Biaya)</label>
+								<div class="col-sm-4">
+									<input type="text" name="data_usaha_profit" value="<?php echo set_value('data_usaha_profit', isset($data->data_usaha_profit) ? $data->data_usaha_profit : ''); ?>" 	class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Aset Usaha</label>
+								<div class="col-sm-4">
+									<input type="text" name="data_usaha_aset" value="<?php echo set_value('data_usaha_aset', isset($data->data_usaha_aset) ? $data->data_usaha_aset : ''); ?>" 	class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Modal Usaha</label>
+								<div class="col-sm-4">
+									<input type="text" name="data_usaha_modal" value="<?php echo set_value('data_usaha_modal', isset($data->data_usaha_modal) ? $data->data_usaha_modal : ''); ?>" 	class="form-control" />
+								</div>
+							</div>
+						</div>
+						
 						<div class="tab-pane" id="pembiayaan">
 							<div class="form-group">
 								<label for="" class="col-sm-3 control-label">Pilih Sumber Pembiayaan</label>

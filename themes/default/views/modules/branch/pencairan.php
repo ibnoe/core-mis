@@ -85,9 +85,20 @@ $user_level = $this->session->userdata('user_level');
 								<td class="text-center">
 									<?php 
 										if($c->data_popi_anggotart AND $c->data_popi_masihsekolah AND $c->data_popi_pendidikanistri AND $c->data_popi_pekerjaansuami AND $c->data_popi_jenislantai AND $c->data_popi_jeniswc AND $c-> data_popi_bahanbakar AND $c->data_popi_gas AND $c-> data_popi_kulkas AND $c->data_popi_motor AND $c->data_popi_total AND $c->data_popi_kategori AND
-										   $c->data_rmc_ukuranrumah AND $c->data_rmc_kondisirumah AND $c->data_rmc_jenisatap AND $c->data_rmc_jenisdinding AND $c->data_rmc_jenislantai AND $c->data_rmc_listrik AND $c->data_rmc_sumberair AND $c->data_rmc_total AND $c->data_rmc_kategori){
-											$database= "OK"; 
-											$database_label = "label-success";
+										   $c->data_rmc_ukuranrumah AND $c->data_rmc_kondisirumah AND $c->data_rmc_jenisatap AND $c->data_rmc_jenisdinding AND $c->data_rmc_jenislantai AND $c->data_rmc_listrik AND $c->data_rmc_sumberair AND $c->data_rmc_total AND $c->data_rmc_kategori)
+										{
+											if($c->data_ke > 1 AND strtotime($c->data_tgl) > strtotime("2016-01-11")){
+												if($c->data_usaha_pendapatan AND $c->data_usaha_biaya AND $c->data_usaha_profit AND $c->data_usaha_aset AND $c->data_usaha_modal){
+													$database= "OK"; 
+													$database_label = "label-success";
+												}else{
+													$database= "NOK";
+													$database_label = "label-danger";
+												}
+											}else{												
+												$database= "OK"; 
+												$database_label = "label-success";
+											}
 										}else{ 
 											$database= "NOK";
 											$database_label = "label-danger";
