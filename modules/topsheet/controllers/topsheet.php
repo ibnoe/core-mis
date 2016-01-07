@@ -716,6 +716,7 @@ class Topsheet extends Front_Controller{
 						'tr_account'   		=>  $this->input->post("data_account_".$i),
 						'tr_client'   		=>  $this->input->post("data_client_".$i),
 						'tr_debet'    		=>  $tabwajib_debet,
+						'tr_credit'    		=>  $tabwajib_credit,
 						'tr_saldo'    		=>  $tabwajib_saldo,
 						'tr_remark'    		=>  "TS ".$topsheet_code
 				);
