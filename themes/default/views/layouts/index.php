@@ -200,7 +200,8 @@ $user_level = $this->session->userdata('user_level');
 											<ul class="nav lt">
 												<li><a href="<?php echo site_url(); ?>/saving/tabwajib"> <i class="fa fa-angle-right"></i>  <span>Tabungan Wajib</span></a></li>												
 												<li><a href="<?php echo site_url(); ?>/saving/tabsukarela"> <i class="fa fa-angle-right"></i>  <span>Tabungan Sukarela</span></a></li>												
-												<li><a href="<?php echo site_url(); ?>/tabberjangka/"> <i class="fa fa-angle-right"></i>  <span>Tabungan Berjangka</span></a></li>											
+												<li><a href="<?php echo site_url(); ?>/tabberjangka/"> <i class="fa fa-angle-right"></i>  <span>Tabungan Berjangka</span></a></li>												
+												<li><a href="<?php echo site_url(); ?>/tabsipeci/"> <i class="fa fa-angle-right"></i>  <span>Tabungan SiPeci</span></a></li>										
 											</ul>
 										</li>
 										<?php } ?>
